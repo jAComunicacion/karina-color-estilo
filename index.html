@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Karina Petelín — Salón Integral de Belleza & Spa · Concepción del Uruguay</title>
+  <meta name="description"
+    content="30 años de excelencia en colorimetría, corte, uñas y belleza integral en Concepción del Uruguay. Reservá tu turno online.">
+
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Outfit:wght@300;400;500&display=swap"
+    rel="stylesheet">
+  <!-- Main CSS -->
+  <link rel="stylesheet" href="assets/css/main.css">
+</head>
+
+<body>
+
+  <!-- ═══════════════════════════════════════════
+       NAVBAR — columna lateral flotante sobre video
+  ════════════════════════════════════════════ -->
+  <nav id="sidenav" aria-label="Navegación principal">
+    <div class="sidenav-logo">
+      <img src="assets/logo/SinFondo.png" alt="Karina Petelín — Salón Integral de Belleza & Spa" width="180">
+    </div>
+
+    <ul class="sidenav-links">
+      <li><a href="#servicios" class="nav-item-link">Servicios</a></li>
+      <li><a href="#salon" class="nav-item-link">Salón</a></li>
+      <li><a href="#turnos" class="nav-item-link">Turnos</a></li>
+      <li><a href="#shop" class="nav-item-link">Shop</a></li>
+      <li><a href="#escuela" class="nav-item-link">Escuela</a></li>
+      <li><a href="#historia" class="nav-item-link">Historia</a></li>
+    </ul>
+  </nav>
+
+  <!-- BOTON INGRESAR — flotante fijo arriba a la derecha -->
+  <button class="btn-ingresar" id="btnIngresar" aria-label="Ingresar al área de clientas y profesionales"
+    style="margin-top: 40px; margin-right: 30px;">
+    INGRESAR
+  </button>
+
+  <!-- Hamburger para mobile -->
+  <button class="nav-hamburger" id="navHamburger" aria-label="Abrir menú" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+
+  <!-- Overlay menú mobile -->
+  <div class="nav-overlay" id="navOverlay"></div>
+
+
+  <!-- ═══════════════════════════════════════════
+       HERO — carrusel de videos a full width
+  ════════════════════════════════════════════════════ -->
+  <section id="hero" aria-label="Presentación del salón">
+    <div class="hero-carousel" id="heroCarousel">
+
+      <!-- Video 1 -->
+      <div class="hero-slide active">
+        <video autoplay muted playsinline preload="auto" aria-label="Video del salón Karina Petelín">
+          <source src="assets/video/clip1.mp4" type="video/mp4">
+        </video>
+        <div class="hero-slide-overlay"></div>
+      </div>
+
+      <!-- Video 2 -->
+      <div class="hero-slide">
+        <video autoplay muted playsinline preload="auto" aria-label="Video del equipo de trabajo">
+          <source src="assets/video/clip2.mp4" type="video/mp4">
+        </video>
+        <div class="hero-slide-overlay"></div>
+      </div>
+
+      <!-- Video 3 -->
+      <div class="hero-slide">
+        <video autoplay muted playsinline preload="auto" aria-label="Video del equipo de trabajo">
+          <source src="assets/video/clip3.mp4" type="video/mp4">
+        </video>
+        <div class="hero-slide-overlay"></div>
+      </div>
+
+      <!-- Tagline centrado sobre el video -->
+      <div class="hero-content" aria-hidden="false">
+        <p class="hero-eyebrow">Concepción del Uruguay · Entre Ríos · Argentina</p>
+        <h1 class="hero-title">
+          Lo que te hacemos<br>
+          <em>queda. Y se mantiene.</em>
+        </h1>
+        <div class="hero-actions">
+          <a href="#turnos" class="btn-primary-kp">Reservar turno</a>
+          <a href="#servicios" class="btn-ghost-kp">Ver servicios</a>
+        </div>
+      </div>
+
+      <!-- Indicadores del carrusel -->
+      <div class="hero-dots" role="tablist" aria-label="Diapositivas del carrusel">
+        <button class="hero-dot active" data-slide="0" role="tab" aria-selected="true"
+          aria-label="Diapositiva 1"></button>
+        <button class="hero-dot" data-slide="1" role="tab" aria-selected="false" aria-label="Diapositiva 2"></button>
+        <button class="hero-dot" data-slide="2" role="tab" aria-selected="false" aria-label="Diapositiva 3"></button>
+      </div>
+
+      <!-- Stats flotantes -->
+      <div class="hero-stats" aria-label="Estadísticas del salón">
+        <div class="hero-stat">
+          <span class="hero-stat-num">30</span>
+          <span class="hero-stat-label">Años</span>
+        </div>
+        <div class="hero-stat">
+          <span class="hero-stat-num">6</span>
+          <span class="hero-stat-label">Especialidades</span>
+        </div>
+        <div class="hero-stat">
+          <span class="hero-stat-num">100%</span>
+          <span class="hero-stat-label">Resultado</span>
+        </div>
+      </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       Faja divisoria con ATRIBUTOS
+  ═══════════════════════════════════════════════════ -->
+  <div class="trust-strip" aria-label="Servicios destacados">
+    <div class="trust-inner">
+      <span>Balayage &amp; Colorimetría avanzada</span>
+      <span class="trust-sep" aria-hidden="true">·</span>
+      <span>Replanteo Integral de tu cabello </span>
+      <span class="trust-sep" aria-hidden="true">·</span>
+      <span>Productos de primera línea</span>
+      <span class="trust-sep" aria-hidden="true">·</span>
+      <span>Uñas con kapping incluido</span>
+      <span class="trust-sep" aria-hidden="true">·</span>
+      <span>Maquillaje profesional</span>
+    </div>
+  </div>
+
+
+  <!-- ═══════════════════════════════════════════
+       SERVICIOS
+  ════════════════════════════════════════════════════ -->
+  <section id="servicios" class="section-block" aria-labelledby="servicios-title">
+    <div class="container-kp">
+      <div class="section-header">
+        <p class="section-label">Nuestros servicios</p>
+        <h2 id="servicios-title" class="section-title">
+          Todo en un<br><em>solo lugar</em>
+        </h2>
+        <p class="section-desc">
+          Corte, colorimetría, manicura, pedicura, cejas, pestañas y maquillaje. Sin turnos dispersos en distintos
+          salones. Una sola tarde bien aprovechada.
+        </p>
+      </div>
+
+      <div class="services-grid">
+
+        <article class="service-card reveal" aria-label="Servicio: Corte y Colorimetría">
+          <div class="service-img-wrap">
+            <img src="assets/img/kps6.JPEG" alt="Resultado de balayage y colorimetría — Karina Petelín Salón"
+              loading="lazy">
+          </div>
+          <div class="service-body">
+            <div class="service-badge">Especialidad</div>
+            <h3 class="service-name">Corte &amp; Colorimetría</h3>
+            <p class="service-desc-text">Balayage, camuflaje de canas, coloración completa y técnicas de degradé.
+              Diseñamos el color según tu cabello, no según una fórmula genérica.</p>
+            <p class="service-price">Desde $150.000 <span>balayage longitud media</span></p>
+          </div>
+        </article>
+
+        <article class="service-card reveal" aria-label="Servicio: Uñas">
+          <div class="service-img-wrap">
+            <img src="assets/img/kps2.jpg" alt="Manicura con esmalte rojo intenso — Karina Petelín Salón"
+              loading="lazy">
+          </div>
+          <div class="service-body">
+            <div class="service-badge">Kapping incluido</div>
+            <h3 class="service-name">Uñas</h3>
+            <p class="service-desc-text">Manicura y pedicura completa con kapping incluido — sin sorpresas en la
+              factura. Una prestación de excelencia que otros salones cobran aparte.</p>
+            <p class="service-price">$20.000 <span>manicura completa con kapping</span></p>
+          </div>
+        </article>
+
+        <article class="service-card reveal" aria-label="Servicio: Pedicura">
+          <div class="service-img-wrap">
+            <img src="assets/img/kps3.jpg" alt="Pedicura con esmalte rojo — Karina Petelín Salón" loading="lazy">
+          </div>
+          <div class="service-body">
+            <h3 class="service-name">Pedicura</h3>
+            <p class="service-desc-text">Tratamiento completo de pies con kapping incluido. Porque el detalle importa de
+              los pies a la cabeza.</p>
+            <p class="service-price">Consultá <span>precio según servicio</span></p>
+          </div>
+        </article>
+
+        <article class="service-card reveal" aria-label="Servicio: Maquillaje profesional">
+          <div class="service-img-wrap">
+            <img src="assets/img/kps1.jpg" alt="Mesa de maquillaje profesional con pinceles — Karina Petelín Salón"
+              loading="lazy">
+          </div>
+          <div class="service-body">
+            <h3 class="service-name">Maquillaje</h3>
+            <p class="service-desc-text">Maquillaje profesional con productos de primera línea. Para eventos, sesiones o
+              cualquier ocasión en la que querés verte en tu mejor versión.</p>
+            <p class="service-price">Consultá <span>precio según servicio</span></p>
+          </div>
+        </article>
+
+        <article class="service-card reveal" aria-label="Servicio: Cejas y Pestañas">
+          <div class="service-img-wrap">
+            <img src="assets/img/kps7.jpg" alt="Mesa de perfilado de cejas — Karina Petelín Salón" loading="lazy">
+          </div>
+          <div class="service-body">
+            <h3 class="service-name">Cejas &amp; Pestañas</h3>
+            <p class="service-desc-text">Diseño de cejas, laminado, tinturas y pestañas. Un detalle que cambia toda la
+              cara — y que hacemos con la misma dedicación que el resto.</p>
+            <p class="service-price">Consultá <span>precio según servicio</span></p>
+          </div>
+        </article>
+
+        <article class="service-card reveal service-card--featured" aria-label="Servicio: Experiencia completa">
+          <div class="service-img-wrap">
+            <img src="assets/img/kps4.jpg" alt="Pincel profesional con polvo — experiencia completa de belleza"
+              loading="lazy">
+          </div>
+          <div class="service-body">
+            <div class="service-badge service-badge--gold">Más elegido</div>
+            <h3 class="service-name">Experiencia completa</h3>
+            <p class="service-desc-text">Combiná servicios en una sola visita. Lavado, corte, camuflaje de canas,
+              manicura, pedicura. Una tarde para vos, sin apuros.</p>
+            <p class="service-price">Reservá y armamos <span>tu combinación ideal</span></p>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       SALÓN — diferencial
+  ════════════════════════════════════════════ -->
+  <section id="salon" class="section-block section-block--dark" aria-labelledby="salon-title">
+    <div class="container-kp">
+      <div class="salon-grid">
+
+        <div class="salon-left">
+          <p class="section-label section-label--light">Por qué elegirnos</p>
+          <h2 id="salon-title" class="section-title section-title--light">
+            Calidad de servicio<br><em>que perdura</em>
+          </h2>
+          <p class="section-desc section-desc--light">
+            No cobramos más porque sí. Cobramos lo justo por hacerlo bien, con los mejores productos del mercado y
+            profesionales que se siguen capacitando. El resultado lo notás hoy y en tres meses.
+          </p>
+
+          <div class="d-cards">
+            <div class="d-card reveal">
+              <div class="d-card-num">01 /</div>
+              <div>
+                <div class="d-card-title">El mejor equipo de trabajo</div>
+                <div class="d-card-desc">Profesionales especializados que se capacitan continuamente, incluyendo en las
+                  técnicas que nosotros mismos enseñamos.</div>
+              </div>
+            </div>
+            <div class="d-card reveal">
+              <div class="d-card-num">02 /</div>
+              <div>
+                <div class="d-card-title">Productos de primera línea</div>
+                <div class="d-card-desc">Trabajamos con marcas que garantizan el cuidado del cabello. Sin atajos que
+                  arruinen tu pelo en el mediano plazo.</div>
+              </div>
+            </div>
+            <div class="d-card reveal">
+              <div class="d-card-num">03 /</div>
+              <div>
+                <div class="d-card-title">Colorimetría de referencia en Argentina</div>
+                <div class="d-card-desc">Balayage, camuflaje de canas, técnicas de degradé. Somos el salón que forma a
+                  otros profesionales en estas técnicas.</div>
+              </div>
+            </div>
+            <div class="d-card reveal">
+              <div class="d-card-num">04 /</div>
+              <div>
+                <div class="d-card-title">Ambiente de relax pensado para vos</div>
+                <div class="d-card-desc">Esa tarde que venís al salón es para tratarte bien. Lo sabemos, y lo diseñamos
+                  así.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="salon-right">
+          <figure class="salon-portrait reveal">
+            <img src="assets/img/kps8.jpg" alt="Karina Petelín aplicando coloración en evento Matrix" loading="lazy">
+            <figcaption>
+              <blockquote>
+                "Fui clienta y hace 8 años no venía. Volví porque me contactaron para ofrecerme un tratamiento que va
+                conmigo."
+                <cite>— Clienta reactivada</cite>
+              </blockquote>
+            </figcaption>
+          </figure>
+
+          <div class="years-block reveal">
+            <div class="years-num">30</div>
+            <div class="years-text">
+              <strong>Años de trayectoria en Concepción del Uruguay</strong>
+              <p>Tres décadas transformando looks y construyendo confianza, una clienta a la vez.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       TURNOS — cómo funciona + reserva
+  ════════════════════════════════════════════ -->
+  <section id="turnos" class="section-block" aria-labelledby="turnos-title">
+    <div class="container-kp">
+      <div class="section-header" style="margin-left: calc(var(--nav-w) / 4);">
+        <p class="section-label">Cómo funciona</p>
+        <h2 id="turnos-title" class="section-title">
+          De la reserva<br><em>al resultado</em>
+        </h2>
+        <p class="section-desc">
+          Cuatro pasos simples para que llegues al salón sin dudas y te vayas exactamente como querías.
+        </p>
+      </div>
+
+      <div class="steps-grid">
+        <div class="step reveal">
+          <div class="step-num" aria-hidden="true">1</div>
+          <h3 class="step-title">Reservás tu turno</h3>
+          <p class="step-desc">Online, en el momento que elijas. Sin llamar, sin esperar confirmación.</p>
+        </div>
+        <div class="step reveal">
+          <div class="step-num" aria-hidden="true">2</div>
+          <h3 class="step-title">Llegás al salón</h3>
+          <p class="step-desc">Te recibimos en un ambiente diseñado para que esa tarde sea solo tuya.</p>
+        </div>
+        <div class="step reveal">
+          <div class="step-num" aria-hidden="true">3</div>
+          <h3 class="step-title">Diagnóstico previo</h3>
+          <p class="step-desc">Antes de empezar, hablamos de lo que necesitás. Sin sorpresas en el medio.</p>
+        </div>
+        <div class="step reveal">
+          <div class="step-num" aria-hidden="true">4</div>
+          <h3 class="step-title">Te vas como querías</h3>
+          <p class="step-desc">Un resultado que se mantiene. En dos meses, notás la diferencia con otros salones.</p>
+        </div>
+      </div>
+
+      <!-- Testimonios -->
+      <div class="testimonios-wrap">
+        <div class="testimonio reveal">
+          <div class="testimonio-stars" aria-label="5 estrellas">★★★★★</div>
+          <p class="testimonio-text">"En el salón KP me cobraron un 15 o 20% más. Roté por otros 3 salones. No me duró
+            nada, me arruinaron la cabeza… Volví."</p>
+          <p class="testimonio-author">— Clienta, retorno 2024</p>
+        </div>
+        <div class="testimonio reveal">
+          <div class="testimonio-stars" aria-label="5 estrellas">★★★★★</div>
+          <p class="testimonio-text">"Fui clienta y hace 8 años no venía. Volví porque me contactaron para ofrecerme un
+            tratamiento que va conmigo, en un día específico."</p>
+          <p class="testimonio-author">— Clienta reactivada</p>
+        </div>
+        <div class="testimonio reveal">
+          <div class="testimonio-stars" aria-label="5 estrellas">★★★★★</div>
+          <p class="testimonio-text">"Hace seis años que vengo cada dos o tres meses y me hago todo. Esa tarde sé que
+            vengo a tratarme bien."</p>
+          <p class="testimonio-author">— Clienta habitual, 6 años</p>
+        </div>
+      </div>
+
+      <!-- CTA reserva -->
+      <div class="turnos-cta reveal">
+        <blockquote class="turnos-quote">
+          "Lo que me hacen acá me queda y se mantiene."
+          <cite>— Lo que escuchamos siempre</cite>
+        </blockquote>
+        <a href="https://wa.me/5493442000000?text=Hola%20Karina%2C%20quiero%20reservar%20un%20turno"
+          class="btn-primary-kp" target="_blank" rel="noopener" aria-label="Reservar turno por WhatsApp">
+          Reservar mi turno
+        </a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       SHOP — productos (sin compra aún)
+  ════════════════════════════════════════════ -->
+  <section id="shop" class="section-block section-block--cream" aria-labelledby="shop-title">
+    <div class="container-kp">
+      <div class="section-header">
+        <p class="section-label">Productos</p>
+        <h2 id="shop-title" class="section-title">
+          Lo que usamos,<br><em>disponible para vos</em>
+        </h2>
+        <p class="section-desc">
+          Los mismos productos elegidos para tratarte, están disponibles para que continúes el cuidado en
+          casa. Consultá disponibilidad en el salón o por WhatsApp.
+        </p>
+      </div>
+
+      <div class="shop-grid">
+        <article class="shop-card reveal" aria-label="Producto: Línea de coloración profesional">
+          <div class="shop-img-placeholder" style="background: var(--cream-mid);">
+            <span aria-hidden="true">🎨</span>
+          </div>
+          <div class="shop-body">
+            <p class="shop-category">Colorimetría</p>
+            <h3 class="shop-name">Línea coloración profesional</h3>
+            <p class="shop-desc">Las mismas marcas que usamos en el salón para resultados que duran.</p>
+            <a href="https://wa.me/5493442000000?text=Hola%2C%20consulto%20por%20productos%20de%20coloraci%C3%B3n"
+              class="btn-ghost-kp btn-ghost-kp--sm" target="_blank" rel="noopener">
+              Consultar disponibilidad
+            </a>
+          </div>
+        </article>
+
+        <article class="shop-card reveal" aria-label="Producto: Tratamientos capilares">
+          <div class="shop-img-placeholder" style="background: var(--tan-light);">
+            <span aria-hidden="true">✨</span>
+          </div>
+          <div class="shop-body">
+            <p class="shop-category">Cuidado capilar</p>
+            <h3 class="shop-name">Tratamientos y mascarillas</h3>
+            <p class="shop-desc">Recuperación, brillo y nutrición para mantener el resultado entre visitas.</p>
+            <a href="https://wa.me/5493442000000?text=Hola%2C%20consulto%20por%20tratamientos%20capilares"
+              class="btn-ghost-kp btn-ghost-kp--sm" target="_blank" rel="noopener">
+              Consultar disponibilidad
+            </a>
+          </div>
+        </article>
+
+        <article class="shop-card reveal" aria-label="Producto: Esmaltes y accesorios para uñas">
+          <div class="shop-img-placeholder" style="background: #f2e8e6;">
+            <span aria-hidden="true">💅</span>
+          </div>
+          <div class="shop-body">
+            <p class="shop-category">Uñas</p>
+            <h3 class="shop-name">Esmaltes y accesorios</h3>
+            <p class="shop-desc">Esmaltes semipermanentes y productos de cuidado de uñas profesionales.</p>
+            <a href="https://wa.me/5493442000000?text=Hola%2C%20consulto%20por%20esmaltes%20y%20productos%20de%20u%C3%B1as"
+              class="btn-ghost-kp btn-ghost-kp--sm" target="_blank" rel="noopener">
+              Consultar disponibilidad
+            </a>
+          </div>
+        </article>
+      </div>
+
+      <p class="shop-note reveal">
+        El catálogo completo está disponible en el salón. Para consultas específicas, escribinos por WhatsApp.
+      </p>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       ESCUELA
+  ════════════════════════════════════════════ -->
+  <section id="escuela" class="section-block section-block--dark" aria-labelledby="escuela-title">
+    <div class="container-kp">
+      <div class="escuela-grid">
+
+        <div class="escuela-left">
+          <p class="section-label section-label--light">Formación profesional</p>
+          <h2 id="escuela-title" class="section-title section-title--light">
+            Aprendé de quienes<br><em>lo hacen todos los días</em>
+          </h2>
+          <p class="section-desc section-desc--light">
+            Salón Karina Petelín forma a los profesionales que después trabajan en los mejores salones de Entre Ríos.
+            Los mismos técnicos y coloristas que atendés son los que enseñan.
+          </p>
+
+          <div class="curso-list">
+            <div class="curso-item reveal">
+              <div class="curso-icon" aria-hidden="true">—</div>
+              <div>
+                <h3 class="curso-title">Colorimetría avanzada</h3>
+                <p class="curso-desc">Balayage, degradé, camuflaje de canas y técnicas de decoloración segura. Nivel
+                  inicial y avanzado.</p>
+              </div>
+            </div>
+            <div class="curso-item reveal">
+              <div class="curso-icon" aria-hidden="true">—</div>
+              <div>
+                <h3 class="curso-title">Técnicas de uñas</h3>
+                <p class="curso-desc">Manicura profesional, kapping, semipermanente y uñas esculpidas. Formación
+                  práctica intensiva.</p>
+              </div>
+            </div>
+            <div class="curso-item reveal">
+              <div class="curso-icon" aria-hidden="true">—</div>
+              <div>
+                <h3 class="curso-title">Cejas y pestañas</h3>
+                <p class="curso-desc">Diseño, laminado, tintura y extensiones. El servicio de mayor crecimiento en el
+                  sector.</p>
+              </div>
+            </div>
+            <div class="curso-item reveal">
+              <div class="curso-icon" aria-hidden="true">—</div>
+              <div>
+                <h3 class="curso-title">Maquillaje profesional</h3>
+                <p class="curso-desc">Desde maquillaje social hasta técnicas para fotografía y eventos. Producto
+                  profesional incluido.</p>
+              </div>
+            </div>
+          </div>
+
+          <a href="https://wa.me/5493442000000?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20los%20cursos"
+            class="btn-primary-kp btn-primary-kp--tan mt-4 d-inline-block" target="_blank" rel="noopener"
+            aria-label="Consultar por cursos por WhatsApp">
+            Consultar próximas fechas
+          </a>
+        </div>
+
+        <div class="escuela-right">
+          <div class="escuela-badge-wrap reveal">
+            <div class="escuela-badge">
+              <div class="escuela-badge-num">+10</div>
+              <div class="escuela-badge-label">Cursos dictados</div>
+            </div>
+            <div class="escuela-badge">
+              <div class="escuela-badge-num">Entre Ríos</div>
+              <div class="escuela-badge-label">Referencia regional</div>
+            </div>
+          </div>
+
+          <blockquote class="escuela-quote reveal">
+            "Somos el salón que forma a otros profesionales en las mismas técnicas que aplicamos cada día."
+            <cite>— Karina Petelín</cite>
+          </blockquote>
+
+          <div class="espacio-pro-cta reveal">
+            <p class="espacio-pro-label">¿Sos profesional del sector?</p>
+            <p class="espacio-pro-desc">Accedé al Espacio Profesionales para ver el catálogo completo de cursos,
+              materiales y contenidos exclusivos.</p>
+            <button class="btn-ingresar-light" id="btnIngresarEscuela"
+              aria-label="Ingresar al espacio de profesionales">
+              INGRESAR AL ESPACIO PROFESIONALES
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       HISTORIA
+  ════════════════════════════════════════════ -->
+  <section id="historia" class="section-block" aria-labelledby="historia-title">
+    <div class="container-kp">
+      <div class="historia-grid">
+
+        <div class="historia-img reveal">
+          <img src="assets/img/kps5.jpg" alt="Karina Petelín — 30 años de trayectoria en colorimetría profesional"
+            loading="lazy">
+          <div class="historia-years-badge" aria-label="30 años de trayectoria">
+            <span class="historia-num">30</span>
+            <span class="historia-sub">años</span>
+          </div>
+        </div>
+
+        <div class="historia-text">
+          <p class="section-label">Historia</p>
+          <h2 id="historia-title" class="section-title">
+            Tres décadas<br><em>construyendo confianza</em>
+          </h2>
+          <p class="section-desc">
+            Karina Petelín comenzó su trayectoria hace tres décadas en Concepción del Uruguay, Entre Ríos. Lo que empezó
+            como un espacio de servicio se fue convirtiendo en referencia regional de colorimetría, técnicas capilares y
+            formación profesional.
+          </p>
+          <p class="section-desc" style="margin-top: 1rem;">
+            Hoy el salón combina atención personalizada, productos de primera línea y una escuela activa que forma a los
+            profesionales de la provincia. La misma dedicación de siempre, con las técnicas de hoy.
+          </p>
+
+          <div class="historia-stats">
+            <div class="h-stat">
+              <span class="h-stat-num">30</span>
+              <span class="h-stat-label">Años de trayectoria</span>
+            </div>
+            <div class="h-stat">
+              <span class="h-stat-num">CDU</span>
+              <span class="h-stat-label">Concepción del Uruguay</span>
+            </div>
+            <div class="h-stat">
+              <span class="h-stat-num">Matrix</span>
+              <span class="h-stat-label">Partner oficial</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       FAQ
+  ════════════════════════════════════════════ -->
+  <section id="faq" class="section-block section-block--cream" aria-labelledby="faq-title">
+    <div class="container-kp">
+      <div class="section-header">
+        <p class="section-label">Preguntas frecuentes</p>
+        <h2 id="faq-title" class="section-title">Todo lo que<br><em>necesitás saber</em></h2>
+      </div>
+
+      <div class="faq-grid">
+        <div class="faq-col">
+          <div class="faq-item reveal">
+            <button class="faq-q" aria-expanded="false" aria-controls="faq-a-1">
+              ¿El kapping siempre está incluido en el precio de uñas?
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-a" id="faq-a-1" role="region">
+              Sí, siempre. En Salón Karina Petelín el kapping es parte de la manicura, no un adicional. El precio que te
+              decimos es el precio final.
+            </div>
+          </div>
+          <div class="faq-item reveal">
+            <button class="faq-q" aria-expanded="false" aria-controls="faq-a-2">
+              ¿Cuánto dura un balayage bien hecho?
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-a" id="faq-a-2" role="region">
+              Con los productos y la técnica adecuada, un balayage puede mantenerse entre 3 y 6 meses sin retoques
+              urgentes. Lo diseñamos para que crezca bien y no muestre raíz marcada.
+            </div>
+          </div>
+          <div class="faq-item reveal">
+            <button class="faq-q" aria-expanded="false" aria-controls="faq-a-3">
+              ¿Trabajan con productos profesionales?
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-a" id="faq-a-3" role="region">
+              Sí. Solo usamos marcas de primera línea, que también tenemos a la venta en el salón. No hacemos
+              concesiones en productos porque ahí está la diferencia entre un resultado que dura y uno que no.
+            </div>
+          </div>
+          <div class="faq-item reveal">
+            <button class="faq-q" aria-expanded="false" aria-controls="faq-a-4">
+              ¿Por qué son un poco más caros que otros salones?
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-a" id="faq-a-4" role="region">
+              Porque usamos mejores productos, tenemos profesionales más capacitados y el resultado dura más. Nuestras
+              clientas que probaron otros salones volvieron. El costo real lo da la durabilidad.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-col">
+          <div class="faq-item reveal">
+            <button class="faq-q" aria-expanded="false" aria-controls="faq-a-5">
+              ¿Puedo combinar varios servicios en un mismo turno?
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-a" id="faq-a-5" role="region">
+              Absolutamente. Muchas clientas combinan coloración, corte y manicura en una sola tarde. Al reservar podés
+              aclararnos qué combinación querés y lo organizamos para que no pierdas tiempo.
+            </div>
+          </div>
+          <div class="faq-item reveal">
+            <button class="faq-q" aria-expanded="false" aria-controls="faq-a-6">
+              ¿Hacen camuflaje de canas sin decoloración?
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-a" id="faq-a-6" role="region">
+              Sí, es una de nuestras especialidades. Diseñamos el camuflaje según el tono natural de tu cabello para que
+              la transición sea progresiva, natural y sin arruinar la estructura del pelo.
+            </div>
+          </div>
+          <div class="faq-item reveal">
+            <button class="faq-q" aria-expanded="false" aria-controls="faq-a-7">
+              ¿Cómo reservo mi turno?
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-a" id="faq-a-7" role="region">
+              Hacés clic en "Reservar turno", elegís el servicio, día y horario disponible. En menos de 2 minutos tenés
+              tu turno confirmado sin llamar a nadie.
+            </div>
+          </div>
+          <div class="faq-item reveal">
+            <button class="faq-q" aria-expanded="false" aria-controls="faq-a-8">
+              ¿Dan clases o capacitaciones?
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-a" id="faq-a-8" role="region">
+              Sí. Salón Karina Petelín dicta cursos de capacitación presenciales en técnicas avanzadas de colorimetría,
+              balayage y cuidado capilar. Consultanos para conocer la próxima fecha.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-cta reveal">
+        <p>¿Tenés otra pregunta antes de reservar?</p>
+        <a href="https://wa.me/5493442000000" class="btn-primary-kp btn-primary-kp--tan" target="_blank" rel="noopener"
+          aria-label="Escribir por WhatsApp">
+          Escribinos por WhatsApp
+        </a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       CTA FINAL
+  ════════════════════════════════════════════ -->
+  <section class="cta-final section-block" aria-label="Llamado a la acción final">
+    <div class="container-kp">
+      <div class="cta-final-wrap" style="text-align: left; padding-left: calc(var(--nav-w) / 4);">
+        <p class="section-label">Tu próximo turno</p>
+        <h2 class="cta-final-title" style="text-align: left;">
+          ¿Lista para<br><em>tratarte bien?</em>
+        </h2>
+        <p class="cta-final-sub" style="text-align: left;">
+          Treinta años cuidando cabellos y manos en Concepción del Uruguay. Reservá online en menos de 2 minutos y llegá
+          a un salón que ya sabe lo que hace.
+        </p>
+        <a href="https://wa.me/5493442000000?text=Hola%20Karina%2C%20quiero%20reservar%20un%20turno"
+          class="btn-primary-kp btn-xl" target="_blank" rel="noopener" aria-label="Reservar turno ahora por WhatsApp">
+          Reservar mi turno ahora
+        </a>
+        <p class="cta-guarantee">✓ Sin tarjeta. Sin prepago. Solo tu turno confirmado.</p>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       PIE DE PAGINA
+  ════════════════════════════════════════════ -->
+  <footer aria-label="Pie de página">
+    <div class="footer-inner">
+
+      <div class="footer-brand-col">
+        <img src="assets/logo/SinFondo.png" alt="Karina Petelín Salón" class="footer-logo" width="130" loading="lazy">
+        <p class="footer-tagline">30 años de excelencia en colorimetría, corte y belleza integral. El salón de
+          referencia en Entre Ríos.</p>
+      </div>
+
+      <div class="footer-links-col">
+        <p class="footer-col-title">Servicios</p>
+        <ul class="footer-links">
+          <li><a href="#servicios">Corte &amp; Colorimetría</a></li>
+          <li><a href="#servicios">Manicura &amp; Pedicura</a></li>
+          <li><a href="#servicios">Cejas &amp; Pestañas</a></li>
+          <li><a href="#servicios">Maquillaje</a></li>
+          <li><a href="#escuela">Cursos presenciales</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-links-col">
+        <p class="footer-col-title">Contacto</p>
+        <ul class="footer-links">
+          <li><a href="#turnos">Reservar turno</a></li>
+          <li>
+            <a href="https://wa.me/5493442000000" target="_blank" rel="noopener" aria-label="WhatsApp del salón">
+              WhatsApp
+            </a>
+          </li>
+          <li><a href="#faq">Preguntas frecuentes</a></li>
+          <li>
+            <a href="https://instagram.com/" target="_blank" rel="noopener" aria-label="Instagram del salón">
+              Instagram
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Redes + BOTON scrol TOP -->
+      <div class="footer-social-col">
+        <p class="footer-col-title">Seguinos</p>
+        <div class="footer-social">
+          <a href="https://instagram.com/" target="_blank" rel="noopener" class="social-icon" aria-label="Instagram">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+              aria-hidden="true">
+              <rect x="2" y="2" width="20" height="20" rx="5" />
+              <circle cx="12" cy="12" r="4" />
+              <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
+            </svg>
+          </a>
+          <a href="https://wa.me/5493442000000" target="_blank" rel="noopener" class="social-icon"
+            aria-label="WhatsApp">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+              aria-hidden="true">
+              <path
+                d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z" />
+            </svg>
+          </a>
+          <a href="https://facebook.com/" target="_blank" rel="noopener" class="social-icon" aria-label="Facebook">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+              aria-hidden="true">
+              <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z" />
+            </svg>
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+      <span>© 2026 Karina Petelín — Salón Integral de Belleza &amp; Spa. Concepción del Uruguay, Entre Ríos.</span>
+      <button class="scroll-top" id="scrollTop" aria-label="Volver al inicio">↑</button>
+    </div>
+  </footer>
+
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Main JS -->
+  <script src="assets/js/main.js"></script>
+</body>
+
+</html>

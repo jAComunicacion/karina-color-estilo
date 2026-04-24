@@ -9,7 +9,7 @@
   --cream-mid: #EDE7DE;
   --warm-tan: #C8A882;
   --tan-light: #E8D9C5;
-  --espresso: #2B1F14;
+  --espresso: #C92D23;
   --bark: #5C3D22;
   --bark-mid: #8B6242;
   --text: #1E1610;
@@ -18,7 +18,6 @@
 
   --serif: 'Cormorant Garamond', Georgia, serif;
   --sans: 'Outfit', sans-serif;
-
   /*
    * Nav proporcional al viewport:
    *   760px  → ~14vw ≈ 106px  (colapsa a hamburger antes de esto)
@@ -28,11 +27,9 @@
    * clamp: mín 200px / preferido 18vw / máx 340px
    */
   --nav-w: clamp(200px, 18vw, 340px);
-
   --max: 1140px;
   --pad: clamp(1.5rem, 5vw, 4rem);
   --radius: 2px;
-
   --transition: .3s ease;
 }
 
@@ -109,8 +106,6 @@ a {
   transition: transform var(--transition);
 }
 
-/* .scrolled NO agrega fondo — eliminado por pedido */
-
 .sidenav-logo {
   margin-bottom: clamp(2rem, 3vw, 3.5rem);
 }
@@ -147,8 +142,8 @@ a {
 
 .nav-item-link:hover,
 .nav-item-link.active {
-  color: var(--warm-tan);
-  border-left-color: var(--warm-tan);
+  color: var(--espresso);
+  border-left-color: var(--espresso);
   padding-left: 1.3rem;
 }
 
@@ -281,7 +276,6 @@ body {
   }
 }
 
-
 /* ══════════════════════════════════════════════
    HERO — full-screen edge to edge, nav flota encima
 ══════════════════════════════════════════════ */
@@ -331,7 +325,8 @@ body {
 .hero-content {
   position: absolute;
   bottom: clamp(4rem, 10vw, 7rem);
-  /* En desktop: left = nav-w + respiro. En tablet/mobile: sobrescrito abajo */
+  /* En desktop: left = nav-w + respiro. 
+  En tablet/mobile: sobrescrito abajo */
   left: calc(var(--nav-w) + clamp(1.5rem, 3vw, 3.5rem));
   right: clamp(1.5rem, 4vw, 5rem);
   z-index: 10;

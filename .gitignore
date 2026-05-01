@@ -18,3 +18,12 @@ npm-debug.log*
 # Temp files
 .temp/
 tmp/
+
+# Carpetas de documentación interna (no sincronizar con GitHub)
+1.construccion/
+1.construcción/
+2.especificacion/
+2.especificación/
+3.clarificacion/
+3.clarificación/
+4.plan/

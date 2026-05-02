@@ -188,6 +188,7 @@ em {
   font-size: 0.8rem;
 }
 
+
 /* ============================================================
    NAVBAR
    ============================================================ */
@@ -203,7 +204,7 @@ em {
 }
 
 #main-nav.scrolled {
-  background: var(--kp-rosa);
+  background: color-mix(in srgb, var(--kp-bordeaux-dk), transparent 20%);
   box-shadow: 0 2px 24px rgba(0, 0, 0, 0.35);
 }
 
@@ -241,7 +242,7 @@ em {
   font-size: 0.68rem;
   letter-spacing: 0.13em;
   text-transform: uppercase;
-  color: var(--kp-texto);
+  color: var(--kp-blanco-cal);
   transition: color var(--t);
   position: relative;
   padding-bottom: 0.15rem;

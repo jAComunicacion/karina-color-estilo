@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reservá tu turno — Karina Petelín</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600;1,700&family=Montserrat:wght@400;500;600;700&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/styles.css" />
+  <link rel="stylesheet" href="assets/css/landing.css" />
+  <script>window.API_BASE_URL = window.location.origin + '/api';</script>
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <header class="kp-header">
+    <a href="index.html">
+      <img src="assets/logo/LogoNBcoFilete.png" alt="Karina Petelin Espacio de Belleza" width="140">
+    </a>
+  </header>
+
+  <!-- TÍTULO -->
+  <div class="kp-page-title">
+    <h2 class="kp-page-title__text"><strong>RESERVA</strong> ONLINE</h2>
+    <div class="kp-page-title__divider">—— ✂ ——</div>
+  </div>
+
+  <!-- FORMULARIO PROGRESIVO -->
+  <div class="kp-form-wrapper" id="kp-form">
+
+    <!-- 01: SERVICIOS -->
+    <section class="kp-section" id="sec-servicios">
+      <div class="kp-section-header">
+        <span class="kp-section-num">01</span>
+        <span class="kp-section-title">Elegí tus servicios</span>
+      </div>
+      <div class="kp-section-body">
+        <div id="kp-rows-container"></div>
+        <div class="kp-cart" id="kp-cart" style="display:none"></div>
+        <button class="kp-btn-add-service hidden" id="btn-add-service" onclick="addServiceRow()">
+          + AGREGAR SERVICIO
+        </button>
+      </div>
+    </section>
+
+    <!-- 02: FECHA Y HORA -->
+    <section class="kp-section kp-section--locked" id="sec-fecha">
+      <div class="kp-section-header">
+        <span class="kp-section-num">02</span>
+        <span class="kp-section-title">Elegí tu fecha y hora</span>
+      </div>
+      <div class="kp-section-body">
+
+        <div class="kp-field" id="field-fecha">
+          <div class="kp-field__trigger" onclick="togglePanel('panel-fecha')">
+            <span class="kp-field__label">FECHA</span>
+            <span class="kp-field__val" id="val-fecha">Seleccioná una fecha</span>
+            <svg class="kp-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="6 9 12 15 18 9" />
+            </svg>
+          </div>
+          <div class="kp-field__panel" id="panel-fecha"></div>
+        </div>
+
+        <div class="kp-field kp-field--hidden" id="field-hora">
+          <div class="kp-field__trigger" onclick="togglePanel('panel-hora')">
+            <span class="kp-field__label">HORA</span>
+            <span class="kp-field__val" id="val-hora">Seleccioná un horario</span>
+            <svg class="kp-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="6 9 12 15 18 9" />
+            </svg>
+          </div>
+          <div class="kp-field__panel" id="panel-hora"></div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 03: DATOS -->
+    <section class="kp-section kp-section--locked" id="sec-datos">
+      <div class="kp-section-header">
+        <span class="kp-section-num">03</span>
+        <span class="kp-section-title">Tus datos</span>
+      </div>
+      <div class="kp-section-body">
+
+        <div class="kp-inputs-row">
+          <div class="kp-input-group">
+            <label class="kp-input-label" for="inp-nombre">Nombre</label>
+            <input class="kp-input" type="text" id="inp-nombre" placeholder="María" autocomplete="given-name" />
+          </div>
+          <div class="kp-input-group">
+            <label class="kp-input-label" for="inp-apellido">Apellido</label>
+            <input class="kp-input" type="text" id="inp-apellido" placeholder="González" autocomplete="family-name" />
+          </div>
+        </div>
+
+        <div class="kp-input-group">
+          <label class="kp-input-label" for="inp-telefono">
+            Teléfono <span class="kp-input-hint">— te confirmamos el turno por acá</span>
+          </label>
+          <input class="kp-input" type="tel" id="inp-telefono" placeholder="3442 123456" autocomplete="tel" />
+        </div>
+
+        <div class="kp-input-group">
+          <label class="kp-input-label" for="inp-email">
+            Email <span class="kp-optional">(opcional)</span>
+          </label>
+          <input class="kp-input" type="email" id="inp-email" placeholder="maria@gmail.com" autocomplete="email" />
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 04: PAGO -->
+    <section class="kp-section kp-section--locked" id="sec-pago">
+      <div class="kp-section-header">
+        <span class="kp-section-num">04</span>
+        <span class="kp-section-title">Confirmá y pagá</span>
+      </div>
+      <div class="kp-section-body">
+
+        <div id="kp-resumen"></div>
+        <div id="kp-upsell" style="display:none"></div>
+
+        <div class="kp-descuento-badge">
+          ✦ 10% de descuento abonando en efectivo el día del turno
+        </div>
+
+        <div class="kp-pago-section">
+          <p class="kp-pago-label">MÉTODO DE PAGO</p>
+          <div class="kp-pago-opts">
+
+            <div class="kp-pago-opt" data-metodo="transferencia" onclick="selectMetodoPago('transferencia')">
+              <div class="kp-pago-opt__radio"></div>
+              <svg class="kp-pago-opt__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <rect x="2" y="5" width="20" height="14" rx="2" />
+                <path d="M2 10h20" />
+              </svg>
+              <div>
+                <p class="kp-pago-opt__name">Transferencia bancaria</p>
+                <p class="kp-pago-opt__desc">Te enviamos los datos por WhatsApp</p>
+              </div>
+            </div>
+
+            <div class="kp-pago-opt" data-metodo="mercado_pago" onclick="selectMetodoPago('mercado_pago')">
+              <div class="kp-pago-opt__radio"></div>
+              <svg class="kp-pago-opt__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <circle cx="12" cy="12" r="10" />
+                <path d="M8 12l3 3 5-6" />
+              </svg>
+              <div>
+                <p class="kp-pago-opt__name">Mercado Pago</p>
+                <p class="kp-pago-opt__desc">Tarjeta, débito o QR — solo la seña</p>
+              </div>
+            </div>
+
+            <div class="kp-pago-opt" data-metodo="local" onclick="selectMetodoPago('local')">
+              <div class="kp-pago-opt__radio"></div>
+              <svg class="kp-pago-opt__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                <polyline points="9 22 9 12 15 12 15 22" />
+              </svg>
+              <div>
+                <p class="kp-pago-opt__name">Pagar en el local</p>
+                <p class="kp-pago-opt__desc">Efectivo, tarjeta o QR el día del turno</p>
+              </div>
+            </div>
+
+          </div>
+          <div id="kp-pago-info"></div>
+        </div>
+
+        <button class="kp-btn-confirmar" id="btn-confirmar" disabled onclick="submitReserva()">
+          CONFIRMAR RESERVA
+        </button>
+
+      </div>
+    </section>
+
+    <!-- 05: CONFIRMACIÓN -->
+    <section class="kp-section kp-section--locked" id="sec-confirm">
+      <div class="kp-section-body">
+        <div class="kp-confirm-wrap">
+          <p class="kp-confirm-eyebrow">La operación fue gestionada con éxito</p>
+          <h2 class="kp-confirm-headline">TURNO<br>AGENDADO!</h2>
+          <div class="kp-confirm-code">
+            <p>Tu código de reserva</p>
+            <strong id="kp-confirm-codigo">—</strong>
+          </div>
+          <div class="kp-confirm-details" id="kp-confirm-body"></div>
+          <div class="kp-confirm-map">
+            <iframe
+              src="https://maps.google.com/maps?q=Justo+Jos%C3%A9+de+Urquiza+479%2C+Concepci%C3%B3n+del+Uruguay%2C+Entre+R%C3%ADos&t=&z=15&ie=UTF8&iwloc=&output=embed"
+              frameborder="0" scrolling="no" allowfullscreen loading="lazy" title="Ubicación del salón">
+            </iframe>
+          </div>
+          <p class="kp-confirm-address">
+            Justo José de Urquiza 479<br>
+            Concepción del Uruguay, Entre Ríos
+          </p>
+          <a href="https://maps.google.com/?q=Justo+Jos%C3%A9+de+Urquiza+479,+Concepci%C3%B3n+del+Uruguay,+Entre+R%C3%ADos"
+            target="_blank" rel="noopener noreferrer" class="kp-btn-llegar">
+            VER CÓMO LLEGAR
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <footer class="kp-footer">
+    <p>© 2026 Karina Petelín — Salón de Belleza · Concepción del Uruguay, Entre Ríos</p>
+  </footer>
+
+  <script src="assets/js/reservar.js"></script>
+</body>
+
+</html>

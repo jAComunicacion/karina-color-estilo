@@ -140,7 +140,8 @@ em {
 .btn-kp-primary {
   background: var(--kp-bordeaux);
   color: var(--kp-blanco);
-  border-color: var(--kp-bordeaux);
+  border-color: var(--kp-blanco);
+  border-width: 2px;
 }
 
 .btn-kp-primary:hover {
@@ -218,7 +219,7 @@ em {
 }
 
 .nav-logo img {
-  height: 180px;
+  height: 85px;
   width: auto;
 }
 

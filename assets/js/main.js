@@ -38,8 +38,10 @@
     document.body.style.overflow = '';
   }
 
-  if (hamburger) hamburger.addEventListener('click', openMenu);
-  if (closeBtn)  closeBtn.addEventListener('click', closeMenu);
+  if (hamburger) hamburger.addEventListener('click', () => {
+    overlay.classList.contains('open') ? closeMenu() : openMenu();
+  });
+  if (closeBtn) closeBtn.addEventListener('click', closeMenu);
 
   overlayLinks.forEach(link => link.addEventListener('click', closeMenu));
 

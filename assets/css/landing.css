@@ -777,13 +777,20 @@ h2,
 
 .kp-header {
   background: var(--kp-bordeaux-dk);
-  padding: 16px 24px;
+  padding: 12px 14px;
   text-align: center;
+
 }
 
 .kp-header a {
   display: inline-block;
   line-height: 0;
+}
+
+.kp-header img {
+  height: 90px;
+  width: auto;
+  /* Mantiene la proporción */
 }
 
 .kp-header__eyebrow {

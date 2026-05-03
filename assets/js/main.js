@@ -122,6 +122,19 @@
     });
   }
 
+  /* ── WHATSAPP TOOLTIP ───────────────────────────────── */
+  const waBtn = document.querySelector('.whatsapp-float');
+
+  if (waBtn) {
+    const waTooltip = document.createElement('div');
+    waTooltip.className = 'wa-tooltip';
+    waTooltip.textContent = 'Hablemos por WApp';
+    document.body.appendChild(waTooltip);
+
+    waBtn.addEventListener('mouseenter', () => waTooltip.classList.add('visible'));
+    waBtn.addEventListener('mouseleave', () => waTooltip.classList.remove('visible'));
+  }
+
   /* ── SMOOTH SCROLL para links internos ───────────────── */
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {

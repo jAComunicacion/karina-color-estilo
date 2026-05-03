@@ -328,6 +328,10 @@ em {
   transition: transform 0.28s ease, opacity 0.28s ease;
 }
 
+.nav-hamburger.open {
+  z-index: 898;
+}
+
 .nav-hamburger.open span:nth-child(1) {
   transform: translateY(7px) rotate(45deg);
 }
@@ -1495,11 +1499,11 @@ footer {
 }
 
 .footer-brand img {
-  height: 44px;
+  height: 65px;
   width: auto;
   margin-bottom: 1rem;
   filter: brightness(0) invert(1);
-  opacity: 0.82;
+  opacity: 1;
 }
 
 .footer-tagline {
@@ -1511,8 +1515,8 @@ footer {
 
 .footer-col-title {
   font-family: var(--font-ui);
-  font-weight: 700;
-  font-size: 0.62rem;
+  font-weight: 600;
+  font-size: 0.85rem;
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--kp-rojo);
@@ -1575,24 +1579,26 @@ footer {
 
 .footer-copyright {
   font-size: 0.68rem;
-  color: rgba(255, 248, 250, 0.25);
+  color: rgba(255, 248, 250, 0.5);
   letter-spacing: 0.03em;
+  padding-bottom: 30px;
 }
 
 .footer-social {
   display: flex;
   gap: 0.65rem;
   align-items: center;
+  padding-bottom: 15px;
 }
 
 .social-icon {
-  width: 32px;
-  height: 32px;
+  width: 40px;
+  height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: rgba(255, 248, 250, 0.35);
-  border: 1px solid rgba(255, 248, 250, 0.1);
+  color: rgba(250, 192, 209, 0.70);
+  border: 2px solid rgba(255, 248, 250, 0.70);
   border-radius: 50%;
   transition: color var(--t), border-color var(--t);
 }
@@ -1623,16 +1629,42 @@ footer {
 }
 
 .whatsapp-float:hover {
-  background: var(--kp-bordeaux);
+  background: #25D366;
+  box-shadow: 0 4px 20px rgba(37, 211, 102, 0.45);
   transform: scale(1.08);
+}
+
+.wa-tooltip {
+  position: fixed;
+  bottom: 2.1rem;
+  right: 5.4rem;
+  background: #25D366;
+  color: #fff;
+  font-family: var(--font-ui);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+  padding: 6px 13px;
+  border-radius: 20px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(8px);
+  transition: opacity 0.22s ease, transform 0.22s ease;
+  z-index: 851;
+}
+
+.wa-tooltip.visible {
+  opacity: 1;
+  transform: translateX(0);
 }
 
 .scroll-top-btn {
   position: fixed;
-  bottom: 5.3rem;
-  right: 1.6rem;
-  width: 34px;
-  height: 34px;
+  bottom: 5.5rem;
+  right: 1.5rem;
+  width: 52px;
+  height: 52px;
   background: rgba(32, 30, 30, 0.7);
   border: 1px solid rgba(255, 248, 250, 0.18);
   border-radius: 50%;
@@ -1640,7 +1672,8 @@ footer {
   align-items: center;
   justify-content: center;
   color: var(--kp-blanco-cal);
-  font-size: 0.8rem;
+  font-size: 2.4rem;
+  line-height: 1;
   z-index: 849;
   opacity: 0;
   pointer-events: none;

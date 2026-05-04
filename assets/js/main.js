@@ -68,7 +68,7 @@
   }
 
   function startAuto() {
-    autoTimer = setInterval(() => goToSlide(current + 1), 5000);
+    autoTimer = setInterval(() => goToSlide(current + 1), 6000);
   }
 
   function stopAuto() {

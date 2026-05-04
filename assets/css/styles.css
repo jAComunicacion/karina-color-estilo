@@ -458,7 +458,7 @@ body {
   opacity: 1;
 }
 
-.hero-overlay {
+.hero-slide-overlay {
   position: absolute;
   inset: 0;
   background: linear-gradient(to bottom,
@@ -468,7 +468,7 @@ body {
   z-index: 1;
 }
 
-.hero-content {
+.hero-slide-content {
   position: absolute;
   bottom: 20%;
   left: 50%;

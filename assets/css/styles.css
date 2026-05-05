@@ -130,6 +130,7 @@ em {
   letter-spacing: 0.12em;
   text-transform: uppercase;
   border-radius: var(--radius);
+  border-color: var(--kp-rosa);
   padding: 0.78rem 1.8rem;
   transition: background var(--t), color var(--t), border-color var(--t);
   white-space: nowrap;

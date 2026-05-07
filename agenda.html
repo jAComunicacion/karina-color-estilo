@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Agenda — Karina Petelín</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600;1,700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/styles.css" />
+  <link rel="stylesheet" href="assets/css/admin.css" />
+  <script>window.API_BASE_URL = window.location.origin + '/api';</script>
+</head>
+<body class="kpa-body">
+
+  <!-- NAV -->
+  <nav class="kpa-nav" id="kpa-nav">
+    <a class="kpa-nav-logo" href="index.html">
+      <img src="assets/logo/EnBlanco.png" alt="KP" />
+    </a>
+    <div class="kpa-nav-links">
+      <a class="kpa-nav-link kpa-nav-link--active" href="agenda.html">Agenda</a>
+      <a class="kpa-nav-link" href="clientas.html">Clientas</a>
+    </div>
+    <span class="kpa-nav-user" id="nav-user"></span>
+    <button class="kpa-btn-logout" onclick="logout()">Salir</button>
+  </nav>
+
+  <!-- PÁGINA -->
+  <main class="kpa-page">
+
+    <!-- HEADER -->
+    <div class="kpa-page-header">
+      <div class="kpa-page-title-block">
+        <span class="kpa-page-eyebrow">Panel de gestión</span>
+        <h1 class="kpa-page-title">Agenda</h1>
+      </div>
+      <div class="kpa-date-nav" id="date-nav">
+        <button class="kpa-date-btn" onclick="moveDay(-1)" title="Día anterior">&#8249;</button>
+        <span class="kpa-date-label" id="date-label">—</span>
+        <button class="kpa-date-btn" onclick="moveDay(1)" title="Día siguiente">&#8250;</button>
+        <button class="kpa-date-today" onclick="goToday()">HOY</button>
+      </div>
+    </div>
+
+    <!-- STATS RÁPIDAS -->
+    <div class="kpa-stats-row" id="stats-row">
+      <div class="kpa-stat-card">
+        <div class="kpa-stat-num" id="stat-total">—</div>
+        <div class="kpa-stat-label">Turnos</div>
+      </div>
+      <div class="kpa-stat-card">
+        <div class="kpa-stat-num" id="stat-confirmados">—</div>
+        <div class="kpa-stat-label">Confirmados</div>
+      </div>
+      <div class="kpa-stat-card">
+        <div class="kpa-stat-num" id="stat-pendientes">—</div>
+        <div class="kpa-stat-label">Pendientes</div>
+      </div>
+    </div>
+
+    <!-- TABLA DE TURNOS -->
+    <div class="kpa-table-wrap" id="table-wrap">
+      <table class="kpa-table" id="agenda-table">
+        <thead>
+          <tr>
+            <th>Hora</th>
+            <th>Cliente</th>
+            <th>Servicios</th>
+            <th>Duración</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody id="agenda-tbody">
+          <tr>
+            <td colspan="6">
+              <div class="kpa-empty">
+                <div class="kpa-empty-icon">📅</div>
+                <p class="kpa-empty-text">Cargando turnos...</p>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </main>
+
+  <!-- MODAL: cambiar estado -->
+  <div class="kpa-modal-overlay" id="modal-estado">
+    <div class="kpa-modal">
+      <div class="kpa-modal-header">
+        <span class="kpa-modal-title">Cambiar estado del turno</span>
+        <button class="kpa-modal-close" onclick="closeModal('modal-estado')">&times;</button>
+      </div>
+      <div class="kpa-modal-body">
+        <div id="modal-cita-info" style="margin-bottom:1.2rem; font-size:0.87rem; line-height:1.7; color:#5A4A4A;"></div>
+        <div class="kpa-estado-opts" id="estado-opts">
+          <div class="kpa-estado-opt" data-estado="reservado" onclick="selectEstado('reservado')">
+            <span class="kpa-badge kpa-badge--reservado">Reservado</span>
+            <span style="font-size:0.82rem; color:#9A8A8A;">Turno solicitado, sin confirmar</span>
+          </div>
+          <div class="kpa-estado-opt" data-estado="confirmado" onclick="selectEstado('confirmado')">
+            <span class="kpa-badge kpa-badge--confirmado">Confirmado</span>
+            <span style="font-size:0.82rem; color:#9A8A8A;">Turno acordado con la clienta</span>
+          </div>
+          <div class="kpa-estado-opt" data-estado="completado" onclick="selectEstado('completado')">
+            <span class="kpa-badge kpa-badge--completado">Completado</span>
+            <span style="font-size:0.82rem; color:#9A8A8A;">Servicio realizado</span>
+          </div>
+          <div class="kpa-estado-opt" data-estado="cancelado" onclick="selectEstado('cancelado')">
+            <span class="kpa-badge kpa-badge--cancelado">Cancelado</span>
+            <span style="font-size:0.82rem; color:#9A8A8A;">Turno cancelado</span>
+          </div>
+        </div>
+      </div>
+      <div class="kpa-modal-footer">
+        <button class="kpa-btn-action" onclick="closeModal('modal-estado')">Cancelar</button>
+        <button class="kpa-btn-primary" id="btn-guardar-estado" onclick="guardarEstado()">GUARDAR</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="assets/js/admin-utils.js"></script>
+  <script>
+    requireAuth();
+
+    const user = getUser();
+    if (user) document.getElementById('nav-user').textContent = user.nombre || user.email;
+
+    let currentDate = new Date();
+    let citaIdEditing = null;
+    let estadoSeleccionado = null;
+    let citasDelDia = [];
+
+    const ESTADOS_LABEL = {
+      reservado: 'Reservado',
+      confirmado: 'Confirmado',
+      completado: 'Completado',
+      cancelado: 'Cancelado'
+    };
+
+    function moveDay(delta) {
+      currentDate.setDate(currentDate.getDate() + delta);
+      loadAgenda();
+    }
+
+    function goToday() {
+      currentDate = new Date();
+      loadAgenda();
+    }
+
+    function updateDateLabel() {
+      const opts = { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' };
+      const label = currentDate.toLocaleDateString('es-AR', opts);
+      document.getElementById('date-label').textContent =
+        label.charAt(0).toUpperCase() + label.slice(1);
+    }
+
+    async function loadAgenda() {
+      updateDateLabel();
+      const tbody = document.getElementById('agenda-tbody');
+      tbody.innerHTML = `<tr><td colspan="6"><div class="kpa-empty"><p class="kpa-empty-text">Cargando...</p></div></td></tr>`;
+
+      try {
+        const fecha = toDateStr(currentDate);
+        const data = await apiFetch(`/citas?fecha=${fecha}`);
+        citasDelDia = Array.isArray(data) ? data : (data.citas || []);
+        renderTabla(citasDelDia);
+        renderStats(citasDelDia);
+      } catch (err) {
+        tbody.innerHTML = `<tr><td colspan="6"><div class="kpa-empty">
+          <div class="kpa-empty-icon">⚠️</div>
+          <p class="kpa-empty-text">Error al cargar. ${err.message || ''}</p>
+        </div></td></tr>`;
+      }
+    }
+
+    function renderStats(citas) {
+      document.getElementById('stat-total').textContent = citas.length;
+      document.getElementById('stat-confirmados').textContent =
+        citas.filter(c => c.estado === 'confirmado').length;
+      document.getElementById('stat-pendientes').textContent =
+        citas.filter(c => c.estado === 'pendiente').length;
+    }
+
+    function renderTabla(citas) {
+      const tbody = document.getElementById('agenda-tbody');
+
+      if (!citas.length) {
+        tbody.innerHTML = `<tr><td colspan="6"><div class="kpa-empty">
+          <div class="kpa-empty-icon">📅</div>
+          <p class="kpa-empty-text">No hay turnos para este día.</p>
+        </div></td></tr>`;
+        return;
+      }
+
+      // Ordenar por hora
+      const sorted = [...citas].sort((a, b) => new Date(a.fecha_hora) - new Date(b.fecha_hora));
+
+      tbody.innerHTML = sorted.map(c => {
+        const cliente = c.client || c.cliente || {};
+        const nombreCliente = `${cliente.nombre || ''} ${cliente.apellido || ''}`.trim() || '—';
+        const tel = cliente.telefono || '';
+        const items = c.items || [];
+        const serviciosStr = items.length
+          ? items.map(i => i.nombre_snapshot || i.nombre || '—').join('<br>')
+          : (c.servicio?.nombre || '—');
+        const duracion = getDuracion(c);
+        const badgeClass = `kpa-badge--${c.estado || 'reservado'}`;
+        const badgeLabel = ESTADOS_LABEL[c.estado] || c.estado || 'Reservado';
+        const hora = c.fecha_hora
+          ? new Date(c.fecha_hora).toLocaleTimeString('es-AR', { hour: '2-digit', minute: '2-digit', hour12: false })
+          : '—';
+
+        return `<tr>
+          <td class="kpa-table-hora">${hora}</td>
+          <td class="kpa-table-cliente">
+            <strong>${nombreCliente}</strong>
+            ${tel ? `<span>${tel}</span>` : ''}
+          </td>
+          <td class="kpa-table-servicios">${serviciosStr}</td>
+          <td class="kpa-table-duracion">${duracion ? duracion + ' min' : '—'}</td>
+          <td><span class="kpa-badge ${badgeClass}">${badgeLabel}</span></td>
+          <td>
+            <div class="kpa-table-actions">
+              <button class="kpa-btn-action" onclick="openModalEstado(${c.id})">Estado</button>
+              ${tel ? `<a class="kpa-btn-action" href="https://wa.me/549${tel.replace(/\D/g,'')}" target="_blank" rel="noopener">WA</a>` : ''}
+            </div>
+          </td>
+        </tr>`;
+      }).join('');
+    }
+
+    function openModalEstado(citaId) {
+      citaIdEditing = citaId;
+      const cita = citasDelDia.find(c => c.id === citaId);
+      if (!cita) return;
+
+      const cliente = cita.client || cita.cliente || {};
+      const nombreCliente = `${cliente.nombre || ''} ${cliente.apellido || ''}`.trim() || '—';
+      const hora = (cita.hora_inicio || '').slice(0, 5);
+      const fecha = toFechaLegible(currentDate.toISOString().slice(0, 10));
+
+      document.getElementById('modal-cita-info').innerHTML =
+        `<strong>${nombreCliente}</strong> — ${fecha} a las ${hora}`;
+
+      estadoSeleccionado = cita.estado || 'reservado';
+      document.querySelectorAll('.kpa-estado-opt').forEach(el => {
+        el.classList.toggle('kpa-estado-opt--selected', el.dataset.estado === estadoSeleccionado);
+      });
+
+      openModal('modal-estado');
+    }
+
+    function selectEstado(estado) {
+      estadoSeleccionado = estado;
+      document.querySelectorAll('.kpa-estado-opt').forEach(el => {
+        el.classList.toggle('kpa-estado-opt--selected', el.dataset.estado === estado);
+      });
+    }
+
+    async function guardarEstado() {
+      if (!citaIdEditing || !estadoSeleccionado) return;
+      const btn = document.getElementById('btn-guardar-estado');
+      btn.disabled = true;
+      btn.textContent = 'GUARDANDO...';
+
+      try {
+        await apiFetch(`/citas/${citaIdEditing}/estado`, {
+          method: 'PATCH',
+          body: JSON.stringify({ estado: estadoSeleccionado })
+        });
+        closeModal('modal-estado');
+        await loadAgenda();
+      } catch (err) {
+        alert('Error al guardar: ' + (err.message || 'Intentá de nuevo'));
+      } finally {
+        btn.disabled = false;
+        btn.textContent = 'GUARDAR';
+      }
+    }
+
+    function openModal(id) {
+      document.getElementById(id).classList.add('open');
+    }
+
+    function closeModal(id) {
+      document.getElementById(id).classList.remove('open');
+    }
+
+    // Cerrar modal al clicar el overlay
+    document.getElementById('modal-estado').addEventListener('click', function(e) {
+      if (e.target === this) closeModal('modal-estado');
+    });
+
+    loadAgenda();
+  </script>
+</body>
+</html>

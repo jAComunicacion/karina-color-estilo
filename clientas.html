@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Clientas — Karina Petelín</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600;1,700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/styles.css" />
+  <link rel="stylesheet" href="assets/css/admin.css" />
+  <script>window.API_BASE_URL = window.location.origin + '/api';</script>
+</head>
+<body class="kpa-body">
+
+  <!-- NAV -->
+  <nav class="kpa-nav">
+    <a class="kpa-nav-logo" href="index.html">
+      <img src="assets/logo/EnBlanco.png" alt="KP" />
+    </a>
+    <div class="kpa-nav-links">
+      <a class="kpa-nav-link" href="agenda.html">Agenda</a>
+      <a class="kpa-nav-link kpa-nav-link--active" href="clientas.html">Clientas</a>
+    </div>
+    <span class="kpa-nav-user" id="nav-user"></span>
+    <button class="kpa-btn-logout" onclick="logout()">Salir</button>
+  </nav>
+
+  <!-- PÁGINA -->
+  <main class="kpa-page">
+
+    <!-- HEADER -->
+    <div class="kpa-page-header">
+      <div class="kpa-page-title-block">
+        <span class="kpa-page-eyebrow">Panel de gestión</span>
+        <h1 class="kpa-page-title">Clientas</h1>
+      </div>
+      <div style="display:flex; gap:0.75rem; align-items:center; flex-wrap:wrap;">
+        <div class="kpa-search-wrap">
+          <svg class="kpa-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+          </svg>
+          <input class="kpa-search" type="text" id="search-input" placeholder="Buscar por nombre o teléfono…" oninput="filterClientas()" />
+        </div>
+        <button class="kpa-btn-primary" onclick="openModalNueva()">+ NUEVA CLIENTA</button>
+      </div>
+    </div>
+
+    <!-- TABLA -->
+    <div class="kpa-table-wrap">
+      <table class="kpa-table">
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Teléfono</th>
+            <th>Email</th>
+            <th>Citas</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody id="clientas-tbody">
+          <tr>
+            <td colspan="5">
+              <div class="kpa-empty">
+                <p class="kpa-empty-text">Cargando clientas...</p>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </main>
+
+  <!-- MODAL: nueva/editar clienta -->
+  <div class="kpa-modal-overlay" id="modal-clienta">
+    <div class="kpa-modal">
+      <div class="kpa-modal-header">
+        <span class="kpa-modal-title" id="modal-clienta-titulo">Nueva clienta</span>
+        <button class="kpa-modal-close" onclick="closeModal('modal-clienta')">&times;</button>
+      </div>
+      <div class="kpa-modal-body">
+        <input type="hidden" id="clienta-id" />
+
+        <div class="kpa-input-group" style="margin-bottom:0.9rem;">
+          <label class="kpa-input-label" for="inp-nombre">Nombre *</label>
+          <input class="kpa-input" type="text" id="inp-nombre" placeholder="María" />
+        </div>
+
+        <div class="kpa-input-group" style="margin-bottom:0.9rem;">
+          <label class="kpa-input-label" for="inp-apellido">Apellido *</label>
+          <input class="kpa-input" type="text" id="inp-apellido" placeholder="González" />
+        </div>
+
+        <div class="kpa-input-group" style="margin-bottom:0.9rem;">
+          <label class="kpa-input-label" for="inp-tel">Teléfono *</label>
+          <input class="kpa-input" type="tel" id="inp-tel" placeholder="3442 123456" />
+        </div>
+
+        <div class="kpa-input-group" style="margin-bottom:0;">
+          <label class="kpa-input-label" for="inp-email-c">Email <span style="font-weight:400;text-transform:none;letter-spacing:0;color:#9A8A8A;font-size:0.75rem;">(opcional)</span></label>
+          <input class="kpa-input" type="email" id="inp-email-c" placeholder="maria@gmail.com" />
+        </div>
+
+        <div id="modal-error" class="kpa-login-error hidden" style="margin-top:0.75rem;"></div>
+      </div>
+      <div class="kpa-modal-footer">
+        <button class="kpa-btn-action" onclick="closeModal('modal-clienta')">Cancelar</button>
+        <button class="kpa-btn-primary" id="btn-guardar-clienta" onclick="guardarClienta()">GUARDAR</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="assets/js/admin-utils.js"></script>
+  <script>
+    requireAuth();
+
+    const user = getUser();
+    if (user) document.getElementById('nav-user').textContent = user.nombre || user.email;
+
+    let todasClientas = [];
+
+    async function loadClientas() {
+      const tbody = document.getElementById('clientas-tbody');
+      try {
+        const data = await apiFetch('/clientes');
+        todasClientas = Array.isArray(data) ? data : (data.clientes || []);
+        renderClientas(todasClientas);
+      } catch (err) {
+        tbody.innerHTML = `<tr><td colspan="5"><div class="kpa-empty">
+          <div class="kpa-empty-icon">⚠️</div>
+          <p class="kpa-empty-text">Error al cargar clientas. ${err.message || ''}</p>
+        </div></td></tr>`;
+      }
+    }
+
+    function renderClientas(lista) {
+      const tbody = document.getElementById('clientas-tbody');
+
+      if (!lista.length) {
+        tbody.innerHTML = `<tr><td colspan="5"><div class="kpa-empty">
+          <div class="kpa-empty-icon">👤</div>
+          <p class="kpa-empty-text">No hay clientas registradas todavía.</p>
+        </div></td></tr>`;
+        return;
+      }
+
+      tbody.innerHTML = lista.map(c => {
+        const nombre = `${c.nombre || ''} ${c.apellido || ''}`.trim() || '—';
+        const citas = c.appointments_count ?? c.citasCount ?? '—';
+        return `<tr>
+          <td><strong>${nombre}</strong></td>
+          <td>${c.telefono || '—'}</td>
+          <td style="font-size:0.82rem; color:#9A8A8A;">${c.email || '—'}</td>
+          <td style="text-align:center;">${citas}</td>
+          <td>
+            <div class="kpa-table-actions">
+              <button class="kpa-btn-action" onclick="openModalEditar(${c.id})">Editar</button>
+              ${c.telefono ? `<a class="kpa-btn-action" href="https://wa.me/549${c.telefono.replace(/\D/g,'')}" target="_blank" rel="noopener">WA</a>` : ''}
+            </div>
+          </td>
+        </tr>`;
+      }).join('');
+    }
+
+    function filterClientas() {
+      const q = document.getElementById('search-input').value.toLowerCase().trim();
+      if (!q) { renderClientas(todasClientas); return; }
+      const filtered = todasClientas.filter(c =>
+        `${c.nombre} ${c.apellido}`.toLowerCase().includes(q) ||
+        (c.telefono || '').includes(q) ||
+        (c.email || '').toLowerCase().includes(q)
+      );
+      renderClientas(filtered);
+    }
+
+    function openModalNueva() {
+      document.getElementById('modal-clienta-titulo').textContent = 'Nueva clienta';
+      document.getElementById('clienta-id').value = '';
+      document.getElementById('inp-nombre').value = '';
+      document.getElementById('inp-apellido').value = '';
+      document.getElementById('inp-tel').value = '';
+      document.getElementById('inp-email-c').value = '';
+      document.getElementById('modal-error').classList.add('hidden');
+      openModal('modal-clienta');
+    }
+
+    function openModalEditar(id) {
+      const c = todasClientas.find(x => x.id === id);
+      if (!c) return;
+      document.getElementById('modal-clienta-titulo').textContent = 'Editar clienta';
+      document.getElementById('clienta-id').value = id;
+      document.getElementById('inp-nombre').value = c.nombre || '';
+      document.getElementById('inp-apellido').value = c.apellido || '';
+      document.getElementById('inp-tel').value = c.telefono || '';
+      document.getElementById('inp-email-c').value = c.email || '';
+      document.getElementById('modal-error').classList.add('hidden');
+      openModal('modal-clienta');
+    }
+
+    async function guardarClienta() {
+      const btn = document.getElementById('btn-guardar-clienta');
+      const errDiv = document.getElementById('modal-error');
+      const id = document.getElementById('clienta-id').value;
+      const nombre = document.getElementById('inp-nombre').value.trim();
+      const apellido = document.getElementById('inp-apellido').value.trim();
+      const telefono = document.getElementById('inp-tel').value.trim();
+      const email = document.getElementById('inp-email-c').value.trim();
+
+      if (!nombre || !apellido || !telefono) {
+        errDiv.textContent = 'Nombre, apellido y teléfono son obligatorios.';
+        errDiv.classList.remove('hidden');
+        return;
+      }
+
+      btn.disabled = true;
+      btn.textContent = 'GUARDANDO...';
+      errDiv.classList.add('hidden');
+
+      try {
+        const body = { nombre, apellido, telefono, ...(email && { email }) };
+        if (id) {
+          await apiFetch(`/clientes/${id}`, { method: 'PUT', body: JSON.stringify(body) });
+        } else {
+          await apiFetch('/clientes', { method: 'POST', body: JSON.stringify(body) });
+        }
+        closeModal('modal-clienta');
+        await loadClientas();
+      } catch (err) {
+        errDiv.textContent = err.message || 'Error al guardar. Intentá de nuevo.';
+        errDiv.classList.remove('hidden');
+      } finally {
+        btn.disabled = false;
+        btn.textContent = 'GUARDAR';
+      }
+    }
+
+    function openModal(id) {
+      document.getElementById(id).classList.add('open');
+    }
+
+    function closeModal(id) {
+      document.getElementById(id).classList.remove('open');
+    }
+
+    document.getElementById('modal-clienta').addEventListener('click', function(e) {
+      if (e.target === this) closeModal('modal-clienta');
+    });
+
+    loadClientas();
+  </script>
+</body>
+</html>

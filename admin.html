@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Acceso — Karina Petelín</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600;1,700&family=Montserrat:wght@400;500;600;700&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/styles.css" />
+  <link rel="stylesheet" href="assets/css/admin.css" />
+  <script>window.API_BASE_URL = window.location.origin + '/api';</script>
+</head>
+
+<body class="kpa-login-body">
+
+  <div class="kpa-login-wrap">
+
+    <div class="kpa-login-brand">
+      <img src="assets/logo/EnBlanco.png" alt="Karina Petelín" width="180" />
+      <p class="kpa-login-eyebrow">Espacio de Belleza</p>
+      <h1 class="kpa-login-name">Panel de Gestion</h1>
+      <p class="kpa-login-sub">Sistema Integral</p>
+    </div>
+
+    <form class="kpa-login-form" id="login-form" onsubmit="handleLogin(event)">
+
+      <div class="kpa-input-group">
+        <label class="kpa-input-label" for="inp-email">Email</label>
+        <input class="kpa-input" type="email" id="inp-email" placeholder="karina@salon.com" autocomplete="email"
+          required />
+      </div>
+
+      <div class="kpa-input-group">
+        <label class="kpa-input-label" for="inp-pass">Contraseña</label>
+        <input class="kpa-input" type="password" id="inp-pass" placeholder="••••••••" autocomplete="current-password"
+          required />
+      </div>
+
+      <div id="login-error" class="kpa-login-error hidden"></div>
+
+      <button class="kpa-btn-confirmar" type="submit" id="btn-login">
+        INGRESAR
+      </button>
+
+    </form>
+
+    <a href="index.html" class="kpa-login-back">jA Comunicacion®
+  </div>
+
+  <script src="assets/js/admin-utils.js"></script>
+  <script>
+    if (getToken()) window.location.href = 'agenda.html';
+
+    async function handleLogin(e) {
+      e.preventDefault();
+      const btn = document.getElementById('btn-login');
+      const errDiv = document.getElementById('login-error');
+      const email = document.getElementById('inp-email').value.trim();
+      const pass = document.getElementById('inp-pass').value;
+
+      btn.disabled = true;
+      btn.textContent = 'INGRESANDO...';
+      errDiv.classList.add('hidden');
+
+      try {
+        const res = await fetch(API + '/auth/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, password: pass })
+        });
+        const data = await res.json();
+
+        if (!res.ok) {
+          errDiv.textContent = data.message || 'Credenciales incorrectas';
+          errDiv.classList.remove('hidden');
+          return;
+        }
+
+        saveSession(data.token, data.user);
+        window.location.href = 'agenda.html';
+
+      } catch {
+        errDiv.textContent = 'Error de conexión. Revisá que el servidor esté activo.';
+        errDiv.classList.remove('hidden');
+      } finally {
+        btn.disabled = false;
+        btn.textContent = 'INGRESAR';
+      }
+    }
+  </script>
+</body>
+
+</html>

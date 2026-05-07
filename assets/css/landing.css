@@ -24,7 +24,7 @@ html {
 
 body {
   font-family: 'Montserrat', sans-serif;
-  background: var(--kp-blanco-cal);
+  background: var(--kp-bordeaux);
   color: var(--kp-texto);
   min-height: 100vh;
 }
@@ -821,7 +821,7 @@ h2,
   font-family: 'Cormorant Garamond', serif;
   font-size: clamp(22px, 5vw, 30px);
   font-weight: 300;
-  color: var(--kp-texto);
+  color: var(--kp-blanco);
   letter-spacing: 4px;
   text-transform: uppercase;
 }
@@ -831,7 +831,7 @@ h2,
 }
 
 .kp-page-title__divider {
-  color: var(--kp-bordeaux);
+  color: rgba(255, 248, 250, 0.35);
   font-size: 14px;
   letter-spacing: 6px;
   margin-top: 8px;
@@ -849,6 +849,8 @@ h2,
   margin-bottom: 8px;
   border-radius: var(--radius-md);
   overflow: hidden;
+  background: var(--kp-blanco);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.14);
 }
 
 .kp-section--locked {
@@ -1946,11 +1948,11 @@ h2,
 
 .kp-footer {
   padding: 28px 20px;
-  background: var(--kp-texto);
+  background: var(--kp-bordeaux-dk);
   text-align: center;
   font-size: 12px;
   font-weight: 300;
-  color: var(--kp-texto);
+  color: rgba(255, 248, 250, 0.4);
   letter-spacing: 0.5px;
 }
 

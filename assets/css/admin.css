@@ -1,0 +1,697 @@
+/* ============================================================
+   admin.css — Panel de gestión interno
+   Karina Petelín · Mayo 2026
+   ============================================================ */
+
+/* ─── Utilidades ──────────────────────────────────────────── */
+.hidden { display: none !important; }
+
+/* ─── Body ────────────────────────────────────────────────── */
+.kpa-body {
+  min-height: 100vh;
+  background: var(--kp-blanco-cal);
+  font-family: var(--font-ui);
+  color: var(--kp-texto);
+}
+
+.kpa-login-body {
+  min-height: 100vh;
+  background: var(--kp-negro);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1.25rem;
+}
+
+/* ─── Login ───────────────────────────────────────────────── */
+.kpa-login-wrap {
+  width: 100%;
+  max-width: 360px;
+}
+
+.kpa-login-brand {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.kpa-login-brand img {
+  height: 64px;
+  width: auto;
+  margin: 0 auto 1.2rem;
+}
+
+.kpa-login-eyebrow {
+  font-family: var(--font-ui);
+  font-weight: 600;
+  font-size: 0.62rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--kp-rojo);
+  margin-bottom: 0.4rem;
+}
+
+.kpa-login-name {
+  font-family: var(--font-titulo);
+  font-weight: 600;
+  font-size: 2.2rem;
+  color: var(--kp-blanco-cal);
+  line-height: 1.05;
+  margin-bottom: 0.35rem;
+}
+
+.kpa-login-sub {
+  font-family: var(--font-ui);
+  font-size: 0.75rem;
+  color: rgba(255, 248, 250, 0.4);
+  letter-spacing: 0.06em;
+}
+
+.kpa-login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.kpa-input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.kpa-input-label {
+  font-family: var(--font-ui);
+  font-weight: 600;
+  font-size: 0.62rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(255, 248, 250, 0.5);
+}
+
+.kpa-input {
+  width: 100%;
+  padding: 0.78rem 0.95rem;
+  background: rgba(255, 248, 250, 0.05);
+  border: 1.5px solid rgba(255, 248, 250, 0.12);
+  border-radius: var(--radius);
+  font-family: var(--font-ui);
+  font-size: 0.92rem;
+  color: var(--kp-blanco-cal);
+  outline: none;
+  transition: border-color var(--t);
+}
+
+.kpa-input::placeholder { color: rgba(255, 248, 250, 0.2); }
+
+.kpa-input:focus {
+  border-color: var(--kp-rojo);
+  background: rgba(255, 248, 250, 0.07);
+}
+
+.kpa-login-error {
+  font-size: 0.8rem;
+  color: var(--kp-rojo);
+  text-align: center;
+  padding: 0.5rem;
+  background: rgba(225, 29, 72, 0.1);
+  border-radius: var(--radius);
+}
+
+.kpa-btn-confirmar {
+  display: block;
+  width: 100%;
+  padding: 0.9rem 1.5rem;
+  background: var(--kp-bordeaux);
+  color: var(--kp-blanco);
+  border: none;
+  border-radius: var(--radius);
+  font-family: var(--font-ui);
+  font-weight: 600;
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background var(--t);
+  margin-top: 0.5rem;
+}
+
+.kpa-btn-confirmar:hover:not(:disabled) { background: var(--kp-bordeaux-dk); }
+
+.kpa-btn-confirmar:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.kpa-login-back {
+  display: block;
+  text-align: center;
+  margin-top: 1.5rem;
+  font-family: var(--font-ui);
+  font-size: 0.75rem;
+  color: rgba(255, 248, 250, 0.3);
+  text-decoration: none;
+  transition: color var(--t);
+  letter-spacing: 0.04em;
+}
+
+.kpa-login-back:hover { color: rgba(255, 248, 250, 0.7); }
+
+/* ─── Nav del panel ───────────────────────────────────────── */
+.kpa-nav {
+  background: var(--kp-negro);
+  height: 56px;
+  display: flex;
+  align-items: center;
+  padding: 0 1.5rem;
+  gap: 1.2rem;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.kpa-nav-logo img {
+  height: 36px;
+  width: auto;
+}
+
+.kpa-nav-links {
+  display: flex;
+  gap: 0.2rem;
+  margin: 0 auto 0 1.5rem;
+}
+
+.kpa-nav-link {
+  font-family: var(--font-ui);
+  font-weight: 600;
+  font-size: 0.63rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255, 248, 250, 0.45);
+  padding: 0.45rem 0.85rem;
+  border-radius: var(--radius);
+  text-decoration: none;
+  transition: color var(--t), background var(--t);
+}
+
+.kpa-nav-link:hover {
+  color: var(--kp-blanco-cal);
+  background: rgba(255, 248, 250, 0.06);
+}
+
+.kpa-nav-link--active {
+  color: var(--kp-blanco-cal);
+  background: rgba(255, 248, 250, 0.08);
+}
+
+.kpa-nav-user {
+  font-family: var(--font-ui);
+  font-size: 0.72rem;
+  color: rgba(255, 248, 250, 0.35);
+  letter-spacing: 0.03em;
+  display: none;
+}
+
+@media (min-width: 640px) {
+  .kpa-nav-user { display: block; }
+}
+
+.kpa-btn-logout {
+  background: transparent;
+  border: 1px solid rgba(255, 248, 250, 0.15);
+  border-radius: var(--radius);
+  padding: 0.35rem 0.85rem;
+  font-family: var(--font-ui);
+  font-weight: 600;
+  font-size: 0.62rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255, 248, 250, 0.4);
+  cursor: pointer;
+  transition: color var(--t), border-color var(--t);
+}
+
+.kpa-btn-logout:hover {
+  color: var(--kp-rojo);
+  border-color: var(--kp-rojo);
+}
+
+/* ─── Layout de páginas ───────────────────────────────────── */
+.kpa-page {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 4rem;
+}
+
+.kpa-page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  padding-bottom: 1.2rem;
+  border-bottom: 1px solid rgba(159, 18, 57, 0.1);
+}
+
+.kpa-page-title-block {}
+
+.kpa-page-eyebrow {
+  font-family: var(--font-ui);
+  font-weight: 600;
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--kp-bordeaux);
+  display: block;
+  margin-bottom: 0.3rem;
+}
+
+.kpa-page-title {
+  font-family: var(--font-titulo);
+  font-weight: 600;
+  font-size: clamp(1.8rem, 5vw, 2.5rem);
+  color: var(--kp-texto);
+  line-height: 1.05;
+}
+
+/* ─── Selector de fecha (agenda) ──────────────────────────── */
+.kpa-date-nav {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--kp-blanco);
+  border: 1px solid rgba(159, 18, 57, 0.12);
+  border-radius: var(--radius);
+  padding: 0.4rem 0.6rem;
+}
+
+.kpa-date-btn {
+  background: none;
+  border: none;
+  font-size: 1rem;
+  color: var(--kp-bordeaux);
+  cursor: pointer;
+  padding: 0.25rem 0.5rem;
+  border-radius: var(--radius);
+  transition: background var(--t);
+  line-height: 1;
+}
+
+.kpa-date-btn:hover { background: var(--kp-rosa); }
+
+.kpa-date-label {
+  font-family: var(--font-ui);
+  font-weight: 600;
+  font-size: 0.8rem;
+  color: var(--kp-texto);
+  min-width: 160px;
+  text-align: center;
+}
+
+.kpa-date-today {
+  font-family: var(--font-ui);
+  font-weight: 600;
+  font-size: 0.6rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--kp-bordeaux);
+  padding: 0.3rem 0.7rem;
+  border: 1px solid rgba(159, 18, 57, 0.25);
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: background var(--t), color var(--t);
+  background: none;
+}
+
+.kpa-date-today:hover {
+  background: var(--kp-bordeaux);
+  color: var(--kp-blanco);
+}
+
+/* ─── Tabla de turnos ─────────────────────────────────────── */
+.kpa-table-wrap {
+  background: var(--kp-blanco);
+  border: 1px solid rgba(159, 18, 57, 0.08);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.kpa-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--font-ui);
+}
+
+.kpa-table thead {
+  background: var(--kp-negro);
+}
+
+.kpa-table th {
+  padding: 0.75rem 1rem;
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(255, 248, 250, 0.5);
+  text-align: left;
+  white-space: nowrap;
+}
+
+.kpa-table td {
+  padding: 0.85rem 1rem;
+  font-size: 0.86rem;
+  color: var(--kp-texto);
+  border-bottom: 1px solid rgba(159, 18, 57, 0.06);
+  vertical-align: middle;
+}
+
+.kpa-table tr:last-child td { border-bottom: none; }
+
+.kpa-table tr:hover td {
+  background: var(--kp-blanco-cal);
+}
+
+.kpa-table-hora {
+  font-weight: 700;
+  color: var(--kp-bordeaux);
+  font-size: 0.95rem;
+  white-space: nowrap;
+}
+
+.kpa-table-cliente strong {
+  display: block;
+  font-size: 0.9rem;
+}
+
+.kpa-table-cliente span {
+  font-size: 0.76rem;
+  color: #9A8A8A;
+}
+
+.kpa-table-servicios {
+  font-size: 0.8rem;
+  line-height: 1.6;
+}
+
+.kpa-table-duracion {
+  font-size: 0.76rem;
+  color: #9A8A8A;
+  white-space: nowrap;
+}
+
+/* ─── Badges de estado ────────────────────────────────────── */
+.kpa-badge {
+  display: inline-block;
+  padding: 0.25rem 0.65rem;
+  border-radius: 2px;
+  font-weight: 600;
+  font-size: 0.58rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.kpa-badge--pendiente,
+.kpa-badge--reservado {
+  background: #FEF3C7;
+  color: #92400E;
+}
+
+.kpa-badge--confirmado {
+  background: #D1FAE5;
+  color: #065F46;
+}
+
+.kpa-badge--completado {
+  background: rgba(159, 18, 57, 0.1);
+  color: var(--kp-bordeaux-dk);
+}
+
+.kpa-badge--cancelado {
+  background: #F3F4F6;
+  color: #6B7280;
+}
+
+/* ─── Botones de acción en tabla ──────────────────────────── */
+.kpa-table-actions {
+  display: flex;
+  gap: 0.35rem;
+  align-items: center;
+}
+
+.kpa-btn-action {
+  background: none;
+  border: 1px solid rgba(159, 18, 57, 0.18);
+  border-radius: var(--radius);
+  padding: 0.32rem 0.65rem;
+  font-family: var(--font-ui);
+  font-weight: 600;
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--kp-texto);
+  cursor: pointer;
+  transition: background var(--t), color var(--t), border-color var(--t);
+  white-space: nowrap;
+}
+
+.kpa-btn-action:hover {
+  background: var(--kp-bordeaux);
+  color: var(--kp-blanco);
+  border-color: var(--kp-bordeaux);
+}
+
+.kpa-btn-action--danger:hover {
+  background: #DC2626;
+  border-color: #DC2626;
+  color: var(--kp-blanco);
+}
+
+/* ─── Botón primario del panel ────────────────────────────── */
+.kpa-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.65rem 1.3rem;
+  background: var(--kp-bordeaux);
+  color: var(--kp-blanco);
+  border: none;
+  border-radius: var(--radius);
+  font-family: var(--font-ui);
+  font-weight: 600;
+  font-size: 0.67rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background var(--t);
+  text-decoration: none;
+}
+
+.kpa-btn-primary:hover { background: var(--kp-bordeaux-dk); }
+
+/* ─── Input de búsqueda ───────────────────────────────────── */
+.kpa-search-wrap {
+  position: relative;
+  max-width: 280px;
+  flex: 1;
+}
+
+.kpa-search {
+  width: 100%;
+  padding: 0.65rem 0.9rem 0.65rem 2.2rem;
+  border: 1.5px solid rgba(159, 18, 57, 0.15);
+  border-radius: var(--radius);
+  background: var(--kp-blanco);
+  font-family: var(--font-ui);
+  font-size: 0.86rem;
+  color: var(--kp-texto);
+  outline: none;
+  transition: border-color var(--t);
+}
+
+.kpa-search::placeholder { color: #C0B0B0; }
+.kpa-search:focus { border-color: var(--kp-bordeaux); }
+
+.kpa-search-icon {
+  position: absolute;
+  left: 0.7rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 14px;
+  height: 14px;
+  color: #C0B0B0;
+  pointer-events: none;
+}
+
+/* ─── Estado vacío ────────────────────────────────────────── */
+.kpa-empty {
+  text-align: center;
+  padding: 4rem 1rem;
+  color: #9A8A8A;
+}
+
+.kpa-empty-icon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  opacity: 0.35;
+}
+
+.kpa-empty-text {
+  font-family: var(--font-ui);
+  font-size: 0.87rem;
+  line-height: 1.7;
+}
+
+/* ─── Modal ───────────────────────────────────────────────── */
+.kpa-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  z-index: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+
+.kpa-modal-overlay.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.kpa-modal {
+  background: var(--kp-blanco);
+  border-radius: var(--radius);
+  width: 100%;
+  max-width: 440px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+  transform: translateY(12px);
+  transition: transform 0.2s ease;
+}
+
+.kpa-modal-overlay.open .kpa-modal {
+  transform: translateY(0);
+}
+
+.kpa-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.1rem 1.3rem;
+  background: var(--kp-negro);
+  border-radius: var(--radius) var(--radius) 0 0;
+}
+
+.kpa-modal-title {
+  font-family: var(--font-ui);
+  font-weight: 600;
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--kp-blanco-cal);
+}
+
+.kpa-modal-close {
+  background: none;
+  border: none;
+  color: rgba(255, 248, 250, 0.4);
+  font-size: 1.3rem;
+  cursor: pointer;
+  padding: 0.1rem 0.3rem;
+  transition: color var(--t);
+  line-height: 1;
+}
+
+.kpa-modal-close:hover { color: var(--kp-rojo); }
+
+.kpa-modal-body {
+  padding: 1.4rem 1.3rem;
+}
+
+.kpa-modal-footer {
+  display: flex;
+  gap: 0.6rem;
+  justify-content: flex-end;
+  padding: 1rem 1.3rem;
+  border-top: 1px solid rgba(159, 18, 57, 0.08);
+}
+
+/* ─── Selector de estado (modal agenda) ──────────────────── */
+.kpa-estado-opts {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1.2rem;
+}
+
+.kpa-estado-opt {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 0.9rem;
+  border: 1.5px solid rgba(159, 18, 57, 0.12);
+  border-radius: var(--radius);
+  background: var(--kp-blanco-cal);
+  cursor: pointer;
+  transition: border-color var(--t);
+  font-family: var(--font-ui);
+  font-size: 0.86rem;
+}
+
+.kpa-estado-opt:hover { border-color: var(--kp-bordeaux); }
+
+.kpa-estado-opt--selected {
+  border-color: var(--kp-bordeaux);
+  background: var(--kp-rosa);
+}
+
+/* ─── Tarjetas de estadísticas (opcional) ─────────────────── */
+.kpa-stats-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 0.8rem;
+  margin-bottom: 1.8rem;
+}
+
+.kpa-stat-card {
+  background: var(--kp-blanco);
+  border: 1px solid rgba(159, 18, 57, 0.08);
+  border-radius: var(--radius);
+  padding: 1rem 1.1rem;
+}
+
+.kpa-stat-num {
+  font-family: var(--font-titulo);
+  font-weight: 700;
+  font-size: 2rem;
+  color: var(--kp-bordeaux);
+  line-height: 1;
+  margin-bottom: 0.25rem;
+}
+
+.kpa-stat-label {
+  font-family: var(--font-ui);
+  font-weight: 600;
+  font-size: 0.6rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #9A8A8A;
+}
+
+/* ─── Responsive ──────────────────────────────────────────── */
+@media (max-width: 640px) {
+  .kpa-page { padding: 1.2rem 1rem 3rem; }
+  .kpa-table th:nth-child(4),
+  .kpa-table td:nth-child(4) { display: none; }
+  .kpa-nav-links { gap: 0; }
+  .kpa-nav-link { padding: 0.4rem 0.6rem; font-size: 0.58rem; }
+}
+
+@media (max-width: 480px) {
+  .kpa-table th:nth-child(3),
+  .kpa-table td:nth-child(3) { display: none; }
+}

@@ -235,14 +235,6 @@
       }
     }
 
-    function openModal(id) {
-      document.getElementById(id).classList.add('open');
-    }
-
-    function closeModal(id) {
-      document.getElementById(id).classList.remove('open');
-    }
-
     document.getElementById('modal-clienta').addEventListener('click', function(e) {
       if (e.target === this) closeModal('modal-clienta');
     });

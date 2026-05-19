@@ -695,3 +695,222 @@
   .kpa-table th:nth-child(3),
   .kpa-table td:nth-child(3) { display: none; }
 }
+
+/* ─── Botón nuevo turno ───────────────────────────────────── */
+.kpa-btn-nuevo-turno {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.55rem 1rem;
+  background: var(--kp-bordeaux);
+  color: var(--kp-blanco);
+  border: none;
+  border-radius: var(--radius);
+  font-family: var(--font-ui);
+  font-weight: 600;
+  font-size: 0.63rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background var(--t);
+  white-space: nowrap;
+}
+.kpa-btn-nuevo-turno:hover { background: var(--kp-bordeaux-dk); }
+
+/* ─── Modal overlay secundario (sobre el modal principal) ─── */
+.kpa-modal-overlay--top { z-index: 600; }
+
+/* ─── Modal Nuevo Turno — ancho extendido ─────────────────── */
+.kpa-modal--wide { max-width: 600px; }
+
+/* ─── Secciones del form ──────────────────────────────────── */
+.knt-section { margin-bottom: 1.5rem; }
+
+.knt-label {
+  display: block;
+  font-family: var(--font-ui);
+  font-weight: 600;
+  font-size: 0.59rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--kp-bordeaux);
+  margin-bottom: 0.55rem;
+}
+
+.knt-opt {
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: 0;
+  color: #9A8A8A;
+  font-size: 0.72rem;
+}
+
+/* ─── Chips — desktop ─────────────────────────────────────── */
+.knt-chips-wrap {
+  display: flex;
+  gap: 0.4rem;
+  overflow-x: auto;
+  padding-bottom: 0.25rem;
+  scrollbar-width: none;
+}
+.knt-chips-wrap::-webkit-scrollbar { display: none; }
+
+.knt-chip {
+  flex-shrink: 0;
+  padding: 0.4rem 0.9rem;
+  border: 1.5px solid rgba(159, 18, 57, 0.18);
+  border-radius: var(--radius);
+  background: var(--kp-blanco);
+  font-family: var(--font-ui);
+  font-size: 0.8rem;
+  color: var(--kp-texto);
+  cursor: pointer;
+  transition: all var(--t);
+  white-space: nowrap;
+  line-height: 1.4;
+}
+.knt-chip:hover { border-color: var(--kp-bordeaux); background: var(--kp-blanco-cal); }
+.knt-chip--selected {
+  background: var(--kp-bordeaux);
+  color: var(--kp-blanco);
+  border-color: var(--kp-bordeaux);
+}
+.knt-chip--nueva {
+  border-style: dashed;
+  color: var(--kp-bordeaux);
+}
+.knt-chip--nueva.knt-chip--selected { border-style: solid; }
+
+.knt-loading {
+  font-family: var(--font-ui);
+  font-size: 0.8rem;
+  color: #C0B0B0;
+  padding: 0.35rem 0;
+  font-style: italic;
+}
+
+/* ─── Select — mobile ─────────────────────────────────────── */
+.knt-select { display: none; }
+
+/* ─── Inputs del nuevo turno ──────────────────────────────── */
+.knt-row-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.6rem;
+}
+
+.knt-sublabel {
+  display: block;
+  font-family: var(--font-ui);
+  font-weight: 600;
+  font-size: 0.58rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #9A8A8A;
+  margin-bottom: 0.3rem;
+}
+
+.knt-input {
+  width: 100%;
+  padding: 0.62rem 0.8rem;
+  border: 1.5px solid rgba(159, 18, 57, 0.18);
+  border-radius: var(--radius);
+  background: var(--kp-blanco);
+  font-family: var(--font-ui);
+  font-size: 0.86rem;
+  color: var(--kp-texto);
+  outline: none;
+  transition: border-color var(--t);
+  box-sizing: border-box;
+}
+.knt-input::placeholder { color: #C0B0B0; }
+.knt-input:focus { border-color: var(--kp-bordeaux); }
+
+/* ─── Bloques fecha / hora ────────────────────────────────── */
+.knt-datetime-block {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.8rem 1rem;
+  border: 1.5px solid rgba(159, 18, 57, 0.18);
+  border-radius: var(--radius);
+  background: var(--kp-blanco);
+  transition: border-color var(--t);
+}
+.knt-datetime-block:focus-within { border-color: var(--kp-bordeaux); }
+
+.knt-datetime-input {
+  border: none;
+  outline: none;
+  background: transparent;
+  font-family: var(--font-ui);
+  font-size: 0.9rem;
+  color: var(--kp-texto);
+  cursor: pointer;
+  flex: 1;
+  min-width: 0;
+}
+
+/* ─── Seña ────────────────────────────────────────────────── */
+.knt-sena-wrap {
+  display: flex;
+  align-items: center;
+  border: 1.5px solid rgba(159, 18, 57, 0.18);
+  border-radius: var(--radius);
+  background: var(--kp-blanco);
+  overflow: hidden;
+  transition: border-color var(--t);
+}
+.knt-sena-wrap:focus-within { border-color: var(--kp-bordeaux); }
+
+.knt-sena-prefix {
+  padding: 0.75rem 0.9rem;
+  font-family: var(--font-ui);
+  font-size: 0.9rem;
+  color: #9A8A8A;
+  background: var(--kp-blanco-cal);
+  border-right: 1px solid rgba(159, 18, 57, 0.1);
+  user-select: none;
+}
+
+.knt-sena-input {
+  flex: 1;
+  padding: 0.75rem 0.9rem;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-family: var(--font-ui);
+  font-size: 0.9rem;
+  color: var(--kp-texto);
+}
+
+/* ─── Responsive — modal nuevo turno ─────────────────────── */
+@media (max-width: 640px) {
+  .kpa-modal-overlay:has(.kpa-modal--wide) {
+    align-items: flex-end;
+    padding: 0;
+  }
+  .kpa-modal--wide {
+    max-width: 100%;
+    border-radius: 12px 12px 0 0;
+    max-height: 92dvh;
+  }
+  .knt-chips-wrap { display: none; }
+  .knt-select {
+    display: block;
+    width: 100%;
+    padding: 0.75rem 0.9rem;
+    border: 1.5px solid rgba(159, 18, 57, 0.18);
+    border-radius: var(--radius);
+    background: var(--kp-blanco);
+    font-family: var(--font-ui);
+    font-size: 0.9rem;
+    color: var(--kp-texto);
+    outline: none;
+    cursor: pointer;
+    transition: border-color var(--t);
+    appearance: auto;
+  }
+  .knt-select:focus { border-color: var(--kp-bordeaux); }
+  .knt-row-2 { grid-template-columns: 1fr 1fr; }
+}

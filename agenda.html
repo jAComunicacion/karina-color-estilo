@@ -1,16 +1,20 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Agenda — Karina Petelín</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600;1,700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600;1,700&family=Montserrat:wght@400;500;600;700&display=swap"
+    rel="stylesheet" />
   <link rel="stylesheet" href="assets/css/styles.css" />
   <link rel="stylesheet" href="assets/css/admin.css" />
   <script>window.API_BASE_URL = window.location.origin + '/api';</script>
 </head>
+
 <body class="kpa-body">
 
   <!-- NAV -->
@@ -40,6 +44,7 @@
         <span class="kpa-date-label" id="date-label">—</span>
         <button class="kpa-date-btn" onclick="moveDay(1)" title="Día siguiente">&#8250;</button>
         <button class="kpa-date-today" onclick="goToday()">HOY</button>
+        <button class="kpa-btn-nuevo-turno" onclick="openModalNuevoTurno()">+ NUEVO TURNO</button>
       </div>
     </div>
 
@@ -95,7 +100,8 @@
         <button class="kpa-modal-close" onclick="closeModal('modal-estado')">&times;</button>
       </div>
       <div class="kpa-modal-body">
-        <div id="modal-cita-info" style="margin-bottom:1.2rem; font-size:0.87rem; line-height:1.7; color:#5A4A4A;"></div>
+        <div id="modal-cita-info" style="margin-bottom:1.2rem; font-size:0.87rem; line-height:1.7; color:#5A4A4A;">
+        </div>
         <div class="kpa-estado-opts" id="estado-opts">
           <div class="kpa-estado-opt" data-estado="reservado" onclick="selectEstado('reservado')">
             <span class="kpa-badge kpa-badge--reservado">Reservado</span>
@@ -122,7 +128,109 @@
     </div>
   </div>
 
+  <!-- MODAL: nuevo turno -->
+  <div class="kpa-modal-overlay" id="modal-nuevo-turno">
+    <div class="kpa-modal kpa-modal--wide">
+      <div class="kpa-modal-header">
+        <span class="kpa-modal-title">Nuevo Turno</span>
+        <button class="kpa-modal-close" onclick="closeModal('modal-nuevo-turno')">&times;</button>
+      </div>
+      <div class="kpa-modal-body">
+
+        <!-- CLIENTA -->
+        <div class="knt-section">
+          <span class="knt-label">Clienta</span>
+          <div class="knt-chips-wrap" id="chips-clientas">
+            <span class="knt-loading">Cargando…</span>
+          </div>
+          <select class="knt-select" id="select-clienta">
+            <option value="">Seleccioná una clienta…</option>
+          </select>
+        </div>
+
+        <!-- SERVICIO -->
+        <div class="knt-section">
+          <span class="knt-label">Servicio</span>
+          <div class="knt-chips-wrap" id="chips-servicios">
+            <span class="knt-loading">Cargando…</span>
+          </div>
+          <select class="knt-select" id="select-servicio">
+            <option value="">Seleccioná un servicio…</option>
+          </select>
+        </div>
+
+        <!-- FECHA Y HORA -->
+        <div class="knt-section">
+          <span class="knt-label">Fecha y hora</span>
+          <div class="knt-row-2">
+            <div class="knt-datetime-block">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:var(--kp-bordeaux);flex-shrink:0"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+              <input class="knt-datetime-input" id="nt-fecha" type="date" />
+            </div>
+            <div class="knt-datetime-block">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:var(--kp-bordeaux);flex-shrink:0"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+              <input class="knt-datetime-input" id="nt-hora" type="time" />
+            </div>
+          </div>
+        </div>
+
+        <!-- SEÑA -->
+        <div class="knt-section" style="margin-bottom:0;">
+          <span class="knt-label">Seña <span class="knt-opt">(opcional)</span></span>
+          <div class="knt-sena-wrap">
+            <span class="knt-sena-prefix">$</span>
+            <input class="knt-sena-input" id="nt-sena" type="number" min="0" step="100" value="0" />
+          </div>
+        </div>
+
+        <div id="nt-error" class="kpa-login-error hidden" style="margin-top:1rem; background:rgba(159,18,57,0.08); color:var(--kp-bordeaux);"></div>
+      </div>
+      <div class="kpa-modal-footer">
+        <button class="kpa-btn-action" onclick="closeModal('modal-nuevo-turno')">Cancelar</button>
+        <button class="kpa-btn-primary" id="btn-crear-turno" onclick="crearTurno()">CREAR TURNO</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: nueva clienta (popup secundario) -->
+  <div class="kpa-modal-overlay kpa-modal-overlay--top" id="modal-nueva-clienta">
+    <div class="kpa-modal">
+      <div class="kpa-modal-header">
+        <span class="kpa-modal-title">Nueva Clienta</span>
+        <button class="kpa-modal-close" onclick="closeModal('modal-nueva-clienta')">&times;</button>
+      </div>
+      <div class="kpa-modal-body">
+        <div style="display:flex; flex-direction:column; gap:0.75rem;">
+          <div class="knt-row-2">
+            <div>
+              <label class="knt-sublabel" for="nc-nombre">Nombre *</label>
+              <input class="knt-input" id="nc-nombre" type="text" placeholder="María" autocomplete="off" />
+            </div>
+            <div>
+              <label class="knt-sublabel" for="nc-apellido">Apellido *</label>
+              <input class="knt-input" id="nc-apellido" type="text" placeholder="González" autocomplete="off" />
+            </div>
+          </div>
+          <div>
+            <label class="knt-sublabel" for="nc-tel">Teléfono *</label>
+            <input class="knt-input" id="nc-tel" type="tel" placeholder="3442 123456" autocomplete="off" />
+          </div>
+          <div>
+            <label class="knt-sublabel" for="nc-email">Email <span style="font-weight:400;text-transform:none;letter-spacing:0;color:#9A8A8A;font-size:0.72rem;">(opcional)</span></label>
+            <input class="knt-input" id="nc-email" type="email" placeholder="maria@gmail.com" autocomplete="off" />
+          </div>
+          <div id="nc-error" class="kpa-login-error hidden" style="background:rgba(159,18,57,0.08); color:var(--kp-bordeaux);"></div>
+        </div>
+      </div>
+      <div class="kpa-modal-footer">
+        <button class="kpa-btn-action" onclick="closeModal('modal-nueva-clienta')">Cancelar</button>
+        <button class="kpa-btn-primary" id="btn-guardar-nc" onclick="guardarNuevaClientaRapida()">GUARDAR</button>
+      </div>
+    </div>
+  </div>
+
   <script src="assets/js/admin-utils.js"></script>
   <script src="assets/js/agenda.js"></script>
 </body>
+
 </html>
